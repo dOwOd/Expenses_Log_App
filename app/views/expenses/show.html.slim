@@ -1,2 +1,25 @@
-h1 Expenses#show
-p Find me in app/views/expenses/show.html.slim
+h1 タスクの詳細
+
+.nav.justify-content-end
+  = link_to '一覧', expenses_path, class: 'nav-link'
+
+table.table.table-hover
+  tbody
+    tr
+      th= Expense.human_attribute_name(:id)
+      td= @expense.id
+    tr
+      th= Expense.human_attribute_name(:name)
+      td= @expense.name
+    tr
+      th= Expense.human_attribute_name(:expense)
+      td= "¥#{@expense.expense}"
+    tr
+      th= Expense.human_attribute_name(:description)
+      td= simple_format(h(@expense.description), {}, sanitize: false, wrapper_tag: "div")
+    tr
+      th= Expense.human_attribute_name(:created_at)
+      td= @expense.created_at
+    tr
+      th= Expense.human_attribute_name(:updated_at)
+      td= @expense.updated_at
