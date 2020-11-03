@@ -1,3 +1,15 @@
 h1 経費一覧
 
 = link_to '新規登録', new_expense_path, class: 'btn btn-primary'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Expense.human_attribute_name(:name)
+      th= Expense.human_attribute_name(:expense)
+  tbody
+    - @expenses.each do |expense|
+      tr
+        td= expense.name
+        td= expense.expense
