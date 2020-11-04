@@ -21,6 +21,12 @@ class ExpensesController < ApplicationController
     redirect_to expenses_url, notice: "タスク「#{expense.name}」を更新しました。"
   end
 
+  def destroy
+    expense = Expense.find(params[:id])
+    expense.destroy
+    redirect_to expenses_url, notice: "タスク「#{expense.name}」を削除しました。"
+  end
+
   def create
     expense = Expense.new(expense_params)
     expense.save!
