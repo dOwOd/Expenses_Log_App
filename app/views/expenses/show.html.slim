@@ -23,3 +23,5 @@ table.table.table-hover
     tr
       th= Expense.human_attribute_name(:updated_at)
       td= @expense.updated_at
+
+= link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3'
