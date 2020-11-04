@@ -12,6 +12,13 @@ class ExpensesController < ApplicationController
   end
 
   def edit
+    @expense = Expense.find(params[:id])
+  end
+
+  def update
+    expense = Expense.find(params[:id])
+    expense.update!(expense_params)
+    redirect_to expenses_url, notice: "タスク「#{expense.name}」を更新しました。"
   end
 
   def create

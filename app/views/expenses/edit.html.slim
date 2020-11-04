@@ -1,2 +1,16 @@
-h1 Expenses#edit
-p Find me in app/views/expenses/edit.html.slim
+h1 経費の編集
+
+.nav.justify-content-end
+  = link_to '一覧', expenses_path, class: 'nav-link'
+
+= form_with model: @expense, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'expense_name'
+  .form-group
+    = f.label :expense
+    = f.text_field :expense, class: 'form-control', id: 'expense_expense'
+  .form-group
+    = f.label :description
+    = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_descriptin'
+  = f.submit nil, class: 'btn btn-primary'
