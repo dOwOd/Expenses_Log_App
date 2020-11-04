@@ -16,3 +16,4 @@ table.table.table-hover
         td= "¥#{expense.expense}"
         td
           = link_to '編集', edit_expense_path(expense), class: 'btn btn-primary mr-3' 
+          = link_to '削除', expense, method: :delete, data: { confirm: "タスク「#{expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
