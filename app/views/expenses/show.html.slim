@@ -13,7 +13,7 @@ table.table.table-hover
       td= @expense.name
     tr
       th= Expense.human_attribute_name(:expense)
-      td= "¥#{@expense.expense}"
+      td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
     tr
       th= Expense.human_attribute_name(:description)
       td= simple_format(h(@expense.description), {}, sanitize: false, wrapper_tag: "div")
