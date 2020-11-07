@@ -1,6 +1,7 @@
 h1 経費一覧
 
 = link_to '新規登録', new_expense_path, class: 'btn btn-primary'
+= react_component("ExpensesThousandSeparator", { greeting: "ExpensesThousandSeparator" })
 
 .mb-3
 table.table.table-hover
