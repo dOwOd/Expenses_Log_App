@@ -14,6 +14,3 @@ table.table.table-hover
       tr
         td= link_to expense.name, expense
         td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
-        td
-          = link_to '編集', edit_expense_path(expense), class: 'btn btn-primary mr-3' 
-          = link_to '削除', expense, method: :delete, data: { confirm: "タスク「#{expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
