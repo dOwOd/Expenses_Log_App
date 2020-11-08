@@ -11,6 +11,9 @@ h1 経費の編集
     = f.label :expense
     = f.text_field :expense, class: 'form-control', id: 'expense_expense'
   .form-group
+    = f.label :paid_at
+    = f.text_field :paid_at, class: 'form-control', id: 'expense_paid_at'
+  .form-group
     = f.label :description
     = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_descriptin'
   = f.submit nil, class: 'btn btn-primary'
