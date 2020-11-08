@@ -11,9 +11,11 @@ table.table.table-hover
     tr
       th= Expense.human_attribute_name(:name)
       th= Expense.human_attribute_name(:expense)
+      th= Expense.human_attribute_name(:paid_at)
       th 
   tbody
     - @expenses.each do |expense|
       tr
         td= link_to expense.name, expense
         td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
+        td= expense.paid_at.strftime('%Y-%m-%d')
