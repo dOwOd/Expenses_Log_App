@@ -15,6 +15,9 @@ table.table.table-hover
       th= Expense.human_attribute_name(:expense)
       td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
     tr
+      th= Expense.human_attribute_name(:paid_at)
+      th= @expense.paid_at.strftime('%Y-%m-%d')
+    tr
       th= Expense.human_attribute_name(:description)
       td= simple_format(h(@expense.description), {}, sanitize: false, wrapper_tag: "div")
     tr
