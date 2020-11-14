@@ -1,6 +1,7 @@
 class ExpensesController < ApplicationController
   def index
-    @expenses = Expense.all.order("expense DESC")
+    search_date = Time.now
+    @expenses = Expense.where(paid_at: search_date.in_time_zone.all_month).order("expense DESC")
   end
 
   def show
