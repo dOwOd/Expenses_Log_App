@@ -7,11 +7,15 @@ class DrowPieChart extends React.Component {
     const expenses = this.props.expenses
     let labels = []
     const datasets = []
+    let sum_expense = 0
 
     for (let expense in expenses) {
       datasets.push(expenses[expense].expense)
       labels.push(expenses[expense].name)
+      sum_expense = sum_expense + expenses[expense].expense
     }
+    sum_expense = (sum_expense.toString()).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+    
     /** グラフデータ */
     const graphData = {
         // 軸ラベル
@@ -27,6 +31,7 @@ class DrowPieChart extends React.Component {
     };
     return (
       <div className="DrowPieChart">
+        <h2>¥{sum_expense}</h2>
         {/* グラフコンポーネントの呼び出し */}
         <Doughnut data={graphData}/>
       </div>
