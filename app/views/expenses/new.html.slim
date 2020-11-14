@@ -6,14 +6,14 @@ h1 経費の新規登録
 = form_with model: @expense, local: true do |f|
   .form-group
     = f.label :name
-    = f.text_field :name, class: 'form-control', id: 'expense_name'
+    = f.text_field :name, class: 'form-control', id: 'expense_name', autocomplete: 'off'
   .form-group
     = f.label :expense
-    = f.text_field :expense, class: 'form-control', id: 'expense_expense', type: 'number'
+    = f.text_field :expense, class: 'form-control', id: 'expense_expense', type: 'number', step: '1', autocomplete: 'off'
   .form-group
     = f.label :paid_at
-    = f.text_field :paid_at, class: 'form-control', id: 'expense_paid_at'
+    = f.text_field :paid_at, class: 'form-control', id: 'expense_paid_at', autocomplete: 'off'
   .form-group
     = f.label :description
-    = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_description'
+    = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_description', autocomplete: 'off'
   =  f.submit nil, class: 'btn btn-primary'
