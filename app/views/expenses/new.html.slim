@@ -9,7 +9,7 @@ h1 経費の新規登録
     = f.text_field :name, class: 'form-control', id: 'expense_name'
   .form-group
     = f.label :expense
-    = f.text_field :expense, class: 'form-control', id: 'expense_expense'
+    = f.text_field :expense, class: 'form-control', id: 'expense_expense', type: 'number'
   .form-group
     = f.label :paid_at
     = f.text_field :paid_at, class: 'form-control', id: 'expense_paid_at'
