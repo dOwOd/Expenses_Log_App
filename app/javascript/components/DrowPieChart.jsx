@@ -2,12 +2,13 @@ import React from "react"
 import PropTypes, { array } from "prop-types"
 import { Doughnut } from 'react-chartjs-2';
 
+let sum_expense = 0
+
 class DrowPieChart extends React.Component {
   render () {
     const expenses = this.props.expenses
     let labels = []
     const datasets = []
-    let sum_expense = 0
 
     for (let expense in expenses) {
       datasets.push(expenses[expense].expense)
@@ -31,7 +32,6 @@ class DrowPieChart extends React.Component {
     };
     return (
       <div className="DrowPieChart">
-        <h2>¥{sum_expense}</h2>
         {/* グラフコンポーネントの呼び出し */}
         <Doughnut data={graphData}/>
       </div>
@@ -43,3 +43,23 @@ DrowPieChart.propTypes = {
   expenses: PropTypes.array.isRequired
 };
 export default DrowPieChart
+
+Chart.pluginService.register({
+  beforeDraw: function(chart) {
+    var width = chart.chart.width,
+        height = chart.chart.height,
+        ctx = chart.chart.ctx;
+
+    ctx.restore();
+    var fontSize = (height / 500).toFixed(2);
+    ctx.font = fontSize + "em sans-serif";
+    ctx.textBaseline = "middle";
+
+    var text = "¥" + sum_expense,
+        textX = Math.round((width - ctx.measureText(text).width) / 2),
+        textY = height / 1.875;
+
+    ctx.fillText(text, textX, textY);
+    ctx.save();
+  }
+});
