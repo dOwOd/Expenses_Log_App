@@ -5,7 +5,6 @@ import { Doughnut } from 'react-chartjs-2';
 class DrowPieChart extends React.Component {
   render () {
     const expenses = this.props.expenses
-    console.log(expenses)
     let labels = []
     const datasets = []
 

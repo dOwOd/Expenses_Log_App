@@ -1,7 +1,13 @@
 class ExpensesController < ApplicationController
-  def index
-    search_date = Time.now
+  def index(search_date = Time.now)
     @expenses = Expense.where(paid_at: search_date.in_time_zone.all_month).order("expense DESC")
+  end
+
+  def nextMonth
+    "hogehoge"
+  end
+
+  def lastMonth
   end
 
   def show
@@ -34,9 +40,12 @@ class ExpensesController < ApplicationController
     redirect_to expenses_url, notice: "経費「#{expense.name}」を登録しました．"
   end
 
+  
+
   private
 
   def expense_params
     params.require(:expense).permit(:name, :expense, :paid_at, :description)
   end
+
 end
