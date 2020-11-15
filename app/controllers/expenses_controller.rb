@@ -1,13 +1,7 @@
 class ExpensesController < ApplicationController
   def index(search_date = Time.now)
     @expenses = Expense.where(paid_at: search_date.in_time_zone.all_month).order("expense DESC")
-  end
-
-  def nextMonth
-    "hogehoge"
-  end
-
-  def lastMonth
+    puts @expense
   end
 
   def show
@@ -24,6 +18,19 @@ class ExpensesController < ApplicationController
 
   def update
     expense = Expense.find(params[:id])
+    
+    if !expense.name.present?
+      expense.name = "名称未設定"
+    end 
+
+    if !expense.name.present?
+      expense.expense = 0
+    end
+
+    if !expense.name.present?
+      expense.paid_at = Time.now
+    end
+
     expense.update!(expense_params)
     redirect_to expenses_url, notice: "タスク「#{expense.name}」を更新しました。"
   end
@@ -35,9 +42,25 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    expense = Expense.new(expense_params)
-    expense.save!
-    redirect_to expenses_url, notice: "経費「#{expense.name}」を登録しました．"
+    @expense = Expense.new(expense_params)
+
+    if !@expense.name.present?
+      @expense.name = "名称未設定"
+    end
+
+    if @expense.expense == nil
+      @expense.expense = 0
+    end
+
+    if @expense.paid_at == nil
+      @expense.paid_at = Time.now
+    end
+
+    if @expense.save
+      redirect_to @expense, notice: "経費「#{@expense.name}」を登録しました．"
+    else
+      render :new
+    end
   end
 
   
