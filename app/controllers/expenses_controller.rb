@@ -23,11 +23,11 @@ class ExpensesController < ApplicationController
       expense.name = "名称未設定"
     end 
 
-    if !expense.name.present?
+    if !expense.expense.present?
       expense.expense = 0
     end
 
-    if !expense.name.present?
+    if !expense.paid_at.present?
       expense.paid_at = Time.now
     end
 
