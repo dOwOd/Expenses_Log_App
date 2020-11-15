@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes, { array } from "prop-types"
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2'
+import 'chartjs-plugin-colorschemes'
 
 let sum_expense = 0
 
@@ -25,15 +26,26 @@ class DrowPieChart extends React.Component {
       datasets: [
         // 表示するデータセット
         {
-          data: datasets,
-          backgroundColor: 'rgba(130, 144, 255, 1)',
+          data: datasets
         },
       ],
     };
+
+    const graphOption = {
+      plugins: {
+        colorschemes: {
+          scheme: 'tableau.HueCircle19'
+        }
+      }
+    }
+    // console.log(graphOption)
     return (
       <div className="DrowPieChart">
         {/* グラフコンポーネントの呼び出し */}
-        <Doughnut data={graphData}/>
+        <Doughnut
+          data={graphData} 
+          options={graphOption}
+          />
       </div>
     );
   }
