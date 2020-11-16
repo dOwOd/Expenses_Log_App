@@ -9,7 +9,10 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand ExpensesLog
+      .navbar-brand ExpensesLogApp
+
+      ul.navbar-nav
+        li.nav-item= link_to 'Home', expenses_path, class: 'nav-link'
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice
