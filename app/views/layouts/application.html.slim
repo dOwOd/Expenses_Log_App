@@ -13,6 +13,7 @@ html
 
       ul.navbar-nav
         li.nav-item= link_to 'Home', expenses_path, class: 'nav-link'
+        li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice
