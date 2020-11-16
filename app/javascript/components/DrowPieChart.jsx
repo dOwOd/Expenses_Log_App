@@ -10,6 +10,7 @@ class DrowPieChart extends React.Component {
     const expenses = this.props.expenses
     let labels = []
     const datasets = []
+    sum_expense = 0
 
     for (let expense in expenses) {
       datasets.push(expenses[expense].expense)
