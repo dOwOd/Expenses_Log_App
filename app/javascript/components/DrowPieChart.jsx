@@ -10,12 +10,14 @@ class DrowPieChart extends React.Component {
     const expenses = this.props.expenses
     let labels = []
     const datasets = []
+    sum_expense = 0
 
     for (let expense in expenses) {
       datasets.push(expenses[expense].expense)
       labels.push(expenses[expense].name)
       sum_expense = sum_expense + expenses[expense].expense
     }
+    console.log(sum_expense)
     sum_expense = (sum_expense.toString()).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
     
     /** グラフデータ */

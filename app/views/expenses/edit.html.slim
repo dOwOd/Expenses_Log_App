@@ -1,6 +1,3 @@
 h1 経費の編集
 
-.nav.justify-content-end
-  = link_to '一覧', expenses_path, class: 'nav-link'
-
 = render partial: 'form', locals: { expense: @expense}
