@@ -17,7 +17,6 @@ class DrowPieChart extends React.Component {
       labels.push(expenses[expense].name)
       sum_expense = sum_expense + expenses[expense].expense
     }
-    console.log(sum_expense)
     sum_expense = (sum_expense.toString()).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
     
     /** グラフデータ */
@@ -40,7 +39,6 @@ class DrowPieChart extends React.Component {
         }
       }
     }
-    // console.log(graphOption)
     return (
       <div className="DrowPieChart">
         {/* グラフコンポーネントの呼び出し */}

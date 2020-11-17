@@ -1,7 +1,10 @@
 h1 経費一覧
 
 .title.text-center 
-  h2 = react_component("DrowPieChart", { expenses: @expenses})
+  - if @expenses == []
+    h2 = react_component("DrawPieChartForNoData")
+  -else
+    h2 = react_component("DrowPieChart", { expenses: @expenses})
 
 .mb-3
 table.table.table-hover
