@@ -8,7 +8,6 @@ let sum_expense = 0
 class DrowPieChart extends React.Component {
   render () {
     const expenses = this.props.expenses
-    console.log(expenses)
     let labels = []
     const datasets = []
     sum_expense = 0
@@ -40,7 +39,6 @@ class DrowPieChart extends React.Component {
         }
       }
     }
-    // console.log(graphOption)
     return (
       <div className="DrowPieChart">
         {/* グラフコンポーネントの呼び出し */}

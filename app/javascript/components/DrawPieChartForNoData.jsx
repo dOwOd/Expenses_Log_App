@@ -21,12 +21,18 @@ class DrawPieChartForNoData extends React.Component {
         },
       ],
     };
-    // console.log(graphOption)
+
+    const graphOption = {
+        tooltips: {
+            enabled: false
+        }
+      }
     return (
       <div className="DrawPieChartForNoData">
         {/* グラフコンポーネントの呼び出し */}
         <Doughnut
           data={graphData} 
+          options={graphOption}
           />
       </div>
     );
