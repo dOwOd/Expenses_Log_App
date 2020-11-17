@@ -56,7 +56,7 @@ class ExpensesController < ApplicationController
     end
 
     if @expense.save
-      redirect_to @expense, notice: "経費「#{@expense.name}」を登録しました．"
+      redirect_to expenses_url, notice: "経費「#{@expense.name}」を登録しました．"
     else
       render :new
     end
