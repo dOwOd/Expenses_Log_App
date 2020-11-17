@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes, { array } from "prop-types"
 import { Doughnut } from 'react-chartjs-2'
 
 class DrawPieChartForNoData extends React.Component {
