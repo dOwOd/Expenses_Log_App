@@ -8,6 +8,7 @@ let sum_expense = 0
 class DrowPieChart extends React.Component {
   render () {
     const expenses = this.props.expenses
+    console.log(expenses)
     let labels = []
     const datasets = []
     sum_expense = 0
@@ -17,7 +18,6 @@ class DrowPieChart extends React.Component {
       labels.push(expenses[expense].name)
       sum_expense = sum_expense + expenses[expense].expense
     }
-    console.log(sum_expense)
     sum_expense = (sum_expense.toString()).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
     
     /** グラフデータ */
