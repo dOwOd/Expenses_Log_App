@@ -40,7 +40,7 @@ class DrowPieChart extends React.Component {
       }
     }
     return (
-      <div className="DrowPieChart">
+      <div className="DrowPieChart" style={{float:"right"}}>
         {/* グラフコンポーネントの呼び出し */}
         <Doughnut
           data={graphData} 

@@ -1,10 +1,6 @@
 h1 経費一覧
 
 .title.text-center 
-  - if @expenses == []
-    h2 = react_component("DrawPieChartForNoData")
-  -else
-    h2 = react_component("DrowPieChart", { expenses: @expenses})
 
 .mb-3
 table.table.table-hover
@@ -20,3 +16,8 @@ table.table.table-hover
         td= link_to expense.name, expense
         td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
         td= expense.paid_at.strftime('%Y-%m-%d')
+
+- if @expenses == []
+  = react_component("DrawPieChartForNoData")
+-else
+  = react_component("DrowPieChart", { expenses: @expenses})
