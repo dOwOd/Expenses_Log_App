@@ -2,8 +2,8 @@ h1 経費一覧
 
 .title.text-center 
 
-.mt-3.row
-  table.table.table-hover.col-4
+.col-auto.md-3.row
+  table.table.table-hover.col-6.ml-5
     thead.thead-default
       tr
         th= Expense.human_attribute_name(:name)
@@ -16,7 +16,7 @@ h1 経費一覧
           td= link_to expense.name, expense
           td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
           td= expense.paid_at.strftime('%Y-%m-%d')
-  .col-8
+  .col-5
     - if @expenses == []
       = react_component("DrawPieChartForNoData")
     -else

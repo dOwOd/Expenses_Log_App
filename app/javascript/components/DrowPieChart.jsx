@@ -11,6 +11,8 @@ class DrowPieChart extends React.Component {
     let labels = []
     const datasets = []
     sum_expense = 0
+    const canvasWidth = 650
+    const convasHeight = 650
 
     for (let expense in expenses) {
       datasets.push(expenses[expense].expense)
@@ -37,7 +39,9 @@ class DrowPieChart extends React.Component {
         colorschemes: {
           scheme: 'tableau.HueCircle19'
         }
-      }
+      },
+      maintainAspectRatio: false,
+      responsive: false,
     }
     return (
       <div className="DrowPieChart">
@@ -45,6 +49,8 @@ class DrowPieChart extends React.Component {
         <Doughnut
           data={graphData} 
           options={graphOption}
+          width={canvasWidth}
+          height={convasHeight}
           />
       </div>
     );
@@ -52,7 +58,7 @@ class DrowPieChart extends React.Component {
 }
 
 DrowPieChart.propTypes = {
-  expenses: PropTypes.array.isRequired
+  expenses: PropTypes.array.isRequired,
 };
 export default DrowPieChart
 
@@ -63,7 +69,7 @@ Chart.pluginService.register({
         ctx = chart.chart.ctx;
 
     ctx.restore();
-    var fontSize = (height / 500).toFixed(2);
+    var fontSize = (height / 300).toFixed(2);
     ctx.font = fontSize + "em sans-serif";
     ctx.textBaseline = "middle";
 
