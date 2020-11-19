@@ -28,7 +28,11 @@ class DrawPieChartForNoData extends React.Component {
             enabled: false
         },
         maintainAspectRatio: false,
-        responsive: false
+        responsive: false,
+        animation:{
+            animateRotate: false,
+            animateScale: true
+        }
       }
     return (
       <div className="DrawPieChartForNoData">
