@@ -2,22 +2,22 @@ h1 経費一覧
 
 .title.text-center 
 
-.mb-3
-table.table.table-hover
-  thead.thead-default
-    tr
-      th= Expense.human_attribute_name(:name)
-      th= Expense.human_attribute_name(:expense)
-      th= Expense.human_attribute_name(:paid_at)
-      th 
-  tbody
-    - @expenses.each do |expense|
+.mt-3.row
+  table.table.table-hover.col-4
+    thead.thead-default
       tr
-        td= link_to expense.name, expense
-        td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
-        td= expense.paid_at.strftime('%Y-%m-%d')
-
-- if @expenses == []
-  = react_component("DrawPieChartForNoData")
--else
-  = react_component("DrowPieChart", { expenses: @expenses})
+        th= Expense.human_attribute_name(:name)
+        th= Expense.human_attribute_name(:expense)
+        th= Expense.human_attribute_name(:paid_at)
+        th 
+    tbody
+      - @expenses.each do |expense|
+        tr
+          td= link_to expense.name, expense
+          td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
+          td= expense.paid_at.strftime('%Y-%m-%d')
+  .col-8
+    - if @expenses == []
+      = react_component("DrawPieChartForNoData")
+    -else
+      = react_component("DrowPieChart", { expenses: @expenses})
