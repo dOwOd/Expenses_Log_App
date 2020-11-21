@@ -19,7 +19,6 @@ class DrowPieChart extends React.Component {
       labels.push(expenses[expense].name)
       sum_expense = sum_expense + expenses[expense].expense
     }
-    sum_expense = (sum_expense.toString()).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
     
     /** グラフデータ */
     const graphData = {
@@ -42,7 +41,20 @@ class DrowPieChart extends React.Component {
       },
       maintainAspectRatio: false,
       responsive: false,
+      tooltips: {
+        mode: "label",
+        callbacks: {
+          label: function(tooltipItem, data) {
+            let percent_sum_expense = sum_expense.replace(',', '')
+            let percent = (data.datasets[0].data[tooltipItem.index] / percent_sum_expense) * 100
+            return data.labels[tooltipItem.index] + ': ' + Math.round(percent) + '%'
+          } 
+        }
+      }
     }
+
+    sum_expense = (sum_expense.toString()).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+    
     return (
       <div className="DrowPieChart">
         {/* グラフコンポーネントの呼び出し */}
