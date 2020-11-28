@@ -10,13 +10,13 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-eval': false
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
       .navbar-brand ExpensesLogApp
 
       ul.navbar-nav
-        li.nav-item= link_to 'Home', expenses_path, class: 'nav-link'
+        li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
         li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
     .container.col-10.mt-3.ml-5
       - if flash.notice.present?
@@ -26,4 +26,4 @@ html
     script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"
     script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"
-    script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+    script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"  

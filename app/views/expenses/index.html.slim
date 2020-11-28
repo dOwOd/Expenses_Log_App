@@ -1,8 +1,15 @@
-h1 経費一覧
+sass:
+  #selectDate
+    display: inline;
+  
+.ml-5.mt-5
+  = link_to '＜', expenses_path(select_date: @search_date, months: 'prev'), class: 'btn btn-primary'
+  h1#selectDate= @search_date.strftime(' %Y年%m月 ')
+  = link_to '＞', expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-primary'
 
 .title.text-center 
 
-.col-auto.md-3.row
+.col-auto.md-3.mt-4.row
   table.table.table-hover.col-6.ml-5
     thead.thead-default
       tr
@@ -21,3 +28,5 @@ h1 経費一覧
       = react_component("DrawPieChartForNoData")
     -else
       = react_component("DrowPieChart", { expenses: @expenses})
+
+      KqKFF3WmTsxcQGS

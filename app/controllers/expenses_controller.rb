@@ -1,6 +1,26 @@
+require 'date'
+
 class ExpensesController < ApplicationController
-  def index(search_date = Time.now)
-    @expenses = Expense.where(paid_at: search_date.in_time_zone.all_month).order("expense DESC")
+  def index
+    if params[:select_date] == nil
+      logger.debug('is nil!! -------------')
+      @search_date = Date.today
+    elsif !params[:select_date].kind_of?(Date)
+      @search_date = params[:select_date].to_date
+    else
+      @search_date = params[:select_date]
+    end
+
+    case params[:months]
+    when 'prev'
+      @search_date = @search_date.prev_month(1)
+    when 'next'
+      @search_date = @search_date.next_month(1)
+    when 'home'
+      @search_date = Date.today
+    end
+
+    @expenses = Expense.where(paid_at: @search_date.in_time_zone.all_month).order("expense DESC")
   end
 
   def show
