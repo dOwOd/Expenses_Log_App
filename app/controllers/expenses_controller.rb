@@ -3,7 +3,6 @@ require 'date'
 class ExpensesController < ApplicationController
   def index
     if params[:select_date] == nil
-      logger.debug('is nil!! -------------')
       @search_date = Date.today
     elsif !params[:select_date].kind_of?(Date)
       @search_date = params[:select_date].to_date
