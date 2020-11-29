@@ -13,42 +13,73 @@ class DrowPieChart extends React.Component {
     sum_expense = 0
     const canvasWidth = 650
     const convasHeight = 650
+    let graphData
+    let graphOption
 
-    for (let expense in expenses) {
-      datasets.push(expenses[expense].expense)
-      labels.push(expenses[expense].name)
-      sum_expense = sum_expense + expenses[expense].expense
-    }
-    
-    /** グラフデータ */
-    const graphData = {
+    if (expenses.length) {
+      for (let expense in expenses) {
+        datasets.push(expenses[expense].expense)
+        labels.push(expenses[expense].name)
+        sum_expense = sum_expense + expenses[expense].expense
+      }
+      
+      /** グラフデータ */
+      graphData = {
         // 軸ラベル
         labels
-      ,
-      datasets: [
-        // 表示するデータセット
-        {
-          data: datasets
+        ,
+        datasets: [
+          // 表示するデータセット
+          {
+            data: datasets
+          },
+        ],
+      };
+  
+      graphOption = {
+        plugins: {
+          colorschemes: {
+            scheme: 'tableau.HueCircle19'
+          }
         },
-      ],
-    };
-
-    const graphOption = {
-      plugins: {
-        colorschemes: {
-          scheme: 'tableau.HueCircle19'
+        maintainAspectRatio: false,
+        responsive: false,
+        tooltips: {
+          mode: "label",
+          callbacks: {
+            label: function (tooltipItem, data) {
+              let percent_sum_expense = sum_expense.replace(',', '')
+              let percent = (data.datasets[0].data[tooltipItem.index] / percent_sum_expense) * 100
+              return data.labels[tooltipItem.index] + ': ' + Math.round(percent) + '%'
+            }
+          }
         }
-      },
-      maintainAspectRatio: false,
-      responsive: false,
-      tooltips: {
-        mode: "label",
-        callbacks: {
-          label: function(tooltipItem, data) {
-            let percent_sum_expense = sum_expense.replace(',', '')
-            let percent = (data.datasets[0].data[tooltipItem.index] / percent_sum_expense) * 100
-            return data.labels[tooltipItem.index] + ': ' + Math.round(percent) + '%'
-          } 
+      }
+    } else {
+      datasets.push(100)
+      /** グラフデータ */
+      graphData = {
+        // 軸ラベル
+        labels
+        ,
+        datasets: [
+          // 表示するデータセット
+          {
+            data: datasets
+          },
+        ],
+      };
+      console.log(graphData.datasets)
+
+      graphOption = {
+        tooltips: {
+          enabled: false
+        },
+        maintainAspectRatio: false,
+        responsive: false,
+        animation: {
+          animateRotate: false,
+          animateScale: true
         }
       }
     }
