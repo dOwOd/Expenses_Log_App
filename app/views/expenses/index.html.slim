@@ -24,9 +24,4 @@ sass:
           td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
           td= expense.paid_at.strftime('%Y-%m-%d')
   .col-5
-    - if @expenses == []
-      = react_component("DrawPieChartForNoData")
-    -else
-      = react_component("DrowPieChart", { expenses: @expenses})
-
-      KqKFF3WmTsxcQGS
+    = react_component("DrowPieChart", { expenses: @expenses})
