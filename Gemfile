@@ -57,3 +57,6 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'bootstrap'
 gem 'react-rails'
+# Devise
+gem 'devise'
+gem 'omniauth-twitter'
