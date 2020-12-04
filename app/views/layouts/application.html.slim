@@ -17,9 +17,7 @@ html
 
       ul.navbar-nav
         li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
-        - if user_signed_in?
-          / =link_to current_user.username, expenses_path(select_date: @search_date, months: 'home')
-          =link_to 'ログアウト', destroy_user_session_path, method: :delete
+        / li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
     .container.col-10.mt-3.ml-5
       - if flash.notice.present?
         .alert.alert-success= flash.notice
