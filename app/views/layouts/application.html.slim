@@ -22,6 +22,7 @@ html
           / li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
         - else
           li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
+          li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
     .container.col-10.mt-3.ml-5
       - if flash.notice.present?
         .alert.alert-success= flash.notice

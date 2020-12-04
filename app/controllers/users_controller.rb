@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :login_required, except: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -7,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to user_url(@user), notice: "ユーザー「#{@user.screen_name}」を登録しました。"
+      redirect_to login_url(@user), notice: "ユーザー「#{@user.screen_name}」を登録しました。"
     else
       render :new
     end
