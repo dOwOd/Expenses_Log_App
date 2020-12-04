@@ -16,8 +16,13 @@ html
       .navbar-brand ExpensesLogApp
 
       ul.navbar-nav
-        li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
-        / li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
+        - if current_user
+          li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
+          li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+          / li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
+        - else
+          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
+          li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
     .container.col-10.mt-3.ml-5
       - if flash.notice.present?
         .alert.alert-success= flash.notice

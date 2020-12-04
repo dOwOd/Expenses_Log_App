@@ -1,0 +1,16 @@
+h1 ユーザー登録
+
+= form_with model: @user, local: true do |f|
+  .form-group
+    = f.label :screen_name, '名前'
+    = f.text_field :screen_name, class: 'form-control'
+  .form-group
+    = f.label :email, 'メールアドレス'
+    = f.text_field :email, class: 'form-control'
+  .form-group
+    = f.label :password, 'パスワード'
+    = f.password_field :password, class: 'form-control'
+  .form-group
+    = f.label :password_confirmation, 'パスワード(確認)'
+    = f.password_field :password_confirmation, class: 'form-control'
+  = f.submit '登録する', class: 'btn btn-primary'
