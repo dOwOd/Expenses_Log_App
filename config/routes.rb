@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   root to: 'expenses#index'
   resources :expenses
   get '/expenses/:select_date/:months', to: 'expenses#index'
+  resources :groups do
+    resources :groups_users, only: [:new, :create, :edit, :update]
+  end 
 end

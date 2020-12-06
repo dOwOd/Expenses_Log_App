@@ -19,6 +19,7 @@ html
         - if current_user
           li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
           li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+          li.nav-item= link_to 'グループ', new_group_path, class: 'nav-link'
           / li.nav-item= link_to 'NewExpense', new_expense_path, class: 'nav-link'
         - else
           li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
