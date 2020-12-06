@@ -1,9 +1,9 @@
 .group-form
-  h1 新規チャットグループ
+  h1 グループ設定
   = form_for @group do |f|
     - if @group.errors.any?
       .group-form__errors
-        h2= "# @group.errors.full_messages.count 件のエラーが発生しました。"
+        h2= '# @group.errors.full_messages.count 件のエラーが発生しました。'
         ul
           - @group.errors.full_messages.each do |message|
             li= message
