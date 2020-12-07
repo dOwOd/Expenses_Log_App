@@ -61,6 +61,8 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(expense_params)
+    logger.debug('@expense.inspect --------------------------------------')
+    logger.debug(@expense.inspect)
 
     if !@expense.name.present?
       @expense.name = "名称未設定"
@@ -86,7 +88,7 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    params.require(:expense).permit(:name, :expense, :paid_at, :description)
+    params.require(:expense).permit(:name, :expense, :paid_at, :description, :user_id)
   end
 
 end
