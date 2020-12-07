@@ -19,7 +19,7 @@ class ExpensesController < ApplicationController
       @search_date = Date.today
     end
 
-    @expenses = Expense.where(paid_at: @search_date.in_time_zone.all_month).order("expense DESC")
+    @expenses = Expense.where(user_id: current_user.id, paid_at: @search_date.in_time_zone.all_month).order("expense DESC")
   end
 
   def show
