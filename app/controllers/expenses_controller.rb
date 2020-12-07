@@ -61,8 +61,6 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(expense_params)
-    logger.debug('@expense.inspect --------------------------------------')
-    logger.debug(@expense.inspect)
 
     if !@expense.name.present?
       @expense.name = "名称未設定"

@@ -6,13 +6,10 @@ class GroupsController < ApplicationController
     @group = Group.new
     @group.users << current_user
     
-    logger.debug(@group.users)
   end
 
   def create
     @group = Group.new(group_params)
-    logger.debug(' in create ==========================================================================')
-    logger.debug(@group.inspect)
     if @group.save
       redirect_to root_path, notice: "グループ「」を作成しました。"
     else
