@@ -1,6 +1,9 @@
 class GroupsController < ApplicationController
   def index
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
+    if @groups == []
+      redirect_to expenses_url
+    end
   end
   
   def new
