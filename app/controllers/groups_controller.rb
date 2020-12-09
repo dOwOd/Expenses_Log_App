@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   def index
+    @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
   end
   
   def new
@@ -24,6 +25,10 @@ class GroupsController < ApplicationController
       render :edit
     end
   end
+
+  def show
+    @groups = Groups.find(params[:id])
+  end 
 
   private
   def group_params
