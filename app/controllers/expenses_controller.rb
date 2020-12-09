@@ -3,7 +3,6 @@ require 'date'
 class ExpensesController < ApplicationController
   def index
     if params[:group_id] != nil
-      logger.debug('in group session ===============================================================')
       session[:group_id] = params[:group_id]
     end
 
@@ -94,7 +93,6 @@ class ExpensesController < ApplicationController
   end
 
   def group_params
-    logger.debug('in group_expenses ===================s======================================')
     params.require(:group).permit(:id)
   end 
 
