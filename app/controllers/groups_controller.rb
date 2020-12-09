@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
     if @groups == []
-      redirect_to expenses_url
+      redirect_to new_group_path
     end
   end
   
@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
+      session[:group_id] = @group.id
       redirect_to root_path, notice: "グループ「」を作成しました。"
     else
       render :new
