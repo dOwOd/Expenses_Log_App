@@ -1,18 +1,16 @@
 class GroupsController < ApplicationController
   def index
+    @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
   end
   
   def new
     @group = Group.new
     @group.users << current_user
     
-    logger.debug(@group.users)
   end
 
   def create
     @group = Group.new(group_params)
-    logger.debug(' in create ==========================================================================')
-    logger.debug(@group.inspect)
     if @group.save
       redirect_to root_path, notice: "グループ「」を作成しました。"
     else
@@ -27,6 +25,10 @@ class GroupsController < ApplicationController
       render :edit
     end
   end
+
+  def show
+    @groups = Groups.find(params[:id])
+  end 
 
   private
   def group_params

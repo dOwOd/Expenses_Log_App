@@ -1,2 +1,12 @@
-.wrapper
-  = render 'shared/side_bar'
+h1 グループ一覧
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Group.human_attribute_name(:name)
+      th
+  tbody
+    - @groups.each do |group|
+      tr
+        td= link_to group.name, expenses_path(select_date: @search_date, months: 'home', group_id: group.id)

@@ -2,6 +2,10 @@ require 'date'
 
 class ExpensesController < ApplicationController
   def index
+    if params[:group_id] != nil
+      session[:group_id] = params[:group_id]
+    end
+
     if params[:select_date] == nil
       @search_date = Date.today
     elsif !params[:select_date].kind_of?(Date)
@@ -18,8 +22,7 @@ class ExpensesController < ApplicationController
     when 'home'
       @search_date = Date.today
     end
-
-    @expenses = Expense.where(paid_at: @search_date.in_time_zone.all_month).order("expense DESC")
+    @expenses = Expense.joins(:group_expenses).where(user_id: current_user.id, paid_at: @search_date.in_time_zone.all_month).order("expense DESC")
   end
 
   def show
@@ -42,7 +45,7 @@ class ExpensesController < ApplicationController
     end 
 
     if !expense.expense.present?
-      expense.expense = 0
+      expense.expense =groups 0
     end
 
     if !expense.paid_at.present?
@@ -86,7 +89,11 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    params.require(:expense).permit(:name, :expense, :paid_at, :description)
+    params.require(:expense).permit(:name, :expense, :paid_at, :description, :user_id,  group_ids: [] )
   end
+
+  def group_params
+    params.require(:group).permit(:id)
+  end 
 
 end
