@@ -22,6 +22,11 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.joins(:group_users).where(group_users: {group_id: session[:group_id]}).order("user_id ASC")
+    logger.debug('@users.inspect ==========================================')
+    logger.debug(@users.inspect)
+    logger.debug(@current_group.inspect)
+    logger.debug(session[:group_id])
   end
 
   def user_params
