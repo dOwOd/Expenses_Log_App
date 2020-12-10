@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.joins(:group_users).where(group_users: {group_id: current_group.id}).order("user_id ASC")
   end
 
   def user_params

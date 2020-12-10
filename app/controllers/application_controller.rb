@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_group
-    @current_group = session[:group_id]
+    @current_group = Group.find_by(id: session[:group_id])
   end
 
   def login_required
