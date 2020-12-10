@@ -7,6 +7,6 @@ table.table.table-hover
       th= User.human_attribute_name(:name)
       th
   tbody
-    - @users.each do |group|
+    - @users.each do |user|
       tr
-        td= group.screen_name
+        td= user.screen_name
