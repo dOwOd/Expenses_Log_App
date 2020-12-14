@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :groups do
     resources :groups_users, only: [:new, :create, :edit, :update]
   end 
+  resources :invitations
 end

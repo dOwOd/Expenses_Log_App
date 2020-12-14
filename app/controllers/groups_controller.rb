@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  include GroupsHelper
   def index
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
     if @groups == []
@@ -8,14 +9,13 @@ class GroupsController < ApplicationController
   
   def new
     @group = Group.new
-    @group.users << current_user
-    
+    @group.users << current_user  
   end
 
   def create
-    @group = Group.new(group_params)
-    if @group.save
-      session[:group_id] = @group.id
+    group = Group.new(group_params)
+    if group.save
+      join_group group
       redirect_to root_path, notice: "グループ「」を作成しました。"
     else
       render :new

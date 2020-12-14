@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_033617) do
+ActiveRecord::Schema.define(version: 2020_12_11_235653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 2020_12_07_033617) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "invite_digest"
+    t.integer "invited_by"
+    t.datetime "invite_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
