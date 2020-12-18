@@ -1,12 +1,13 @@
 h1 グループメンバー
 
 .mb-3
-table.table.table-hover
-  thead.thead-default
-    tr
-      th= User.human_attribute_name(:name)
-      th
-  tbody
-    - @users.each do |user|
+  table.table.table-hover
+    thead.thead-default
       tr
-        td= user.screen_name
+        th= User.human_attribute_name(:name)
+        th
+    tbody
+      - @users.each do |user|
+        tr
+          td= user.screen_name
+          td= link_to '削除', remove_path(group_id: current_group.id, user_id: current_user.id), data: { confirm: "グループから「#{user.screen_name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger'

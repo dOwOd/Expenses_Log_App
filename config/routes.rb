@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   
   resources :users
+  delete '/users/:group_id/:user_id', to: 'users#destroy', as: :remove
   root to: 'expenses#index'
   resources :expenses
   get '/expenses/:select_date/:months', to: 'expenses#index'
