@@ -25,6 +25,12 @@ class UsersController < ApplicationController
     @users = User.joins(:group_users).where(group_users: {group_id: current_group.id}).order("user_id ASC")
   end
 
+  def destroy
+    group_users = GroupUser.find_by(group_id: params[:group_id], user_id: params[:user_id])
+    group_users.destroy
+    redirect_to groups_url, notice: 'グループから抜けました。'
+  end
+
   def user_params
     params.require(:user).permit(:screen_name, :email, :password, :password_confirmation)
   end
