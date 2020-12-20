@@ -39,7 +39,6 @@ class User < ApplicationRecord
 
   # トークンがダイジェストと一致したらtrueを返す
   def authenticated?(remember_token)
-    # binding.pry
     return false if invite_digest.nil?
     BCrypt::Password.new(invite_digest).is_password?(remember_token)
   end

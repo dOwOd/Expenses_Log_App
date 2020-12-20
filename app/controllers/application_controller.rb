@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_group
   before_action :login_required
+  before_action :join_required
 
   private
 
@@ -15,5 +16,9 @@ class ApplicationController < ActionController::Base
 
   def login_required
     redirect_to login_url unless current_user
+  end 
+
+  def join_required
+    redirect_to groups_url unless current_group
   end 
 end

@@ -3,18 +3,27 @@ class InvitationsController < ApplicationController
   before_action :get_user,         only: [:edit, :update]
   before_action :valid_user,       only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
+  skip_before_action :login_required, only: [:edit, :update]
 
   def new
   end
 
   def create
-
     if params[:invitee][:email].blank?
       redirect_to new_invitation_url, notice: "メールアドレスを入力してください。"
-    elsif User.find_by(email: params[:invitee][:email])
+
+    elsif User.joins(:group_users).find_by(group_users: { group_id: current_group.id}, email: params[:invitee][:email]) != nil
       redirect_to new_invitation_url, notice: "そのメールアドレスはすでに招待済みです。"
+
     else
-      @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id)
+      # 既にアカウント作成済みの場合(update -> メール送信)
+      if @invite_user = User.find_by(email: params[:invitee][:email])
+        @invite_user.update(invited_by: current_group.id)
+      # アカウント未作成の場合(create -> メール送信)
+      else
+        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id)
+      end
+      
       @invite_user.create_invite_digest
       @invite_user.send_invite_email
       redirect_to root_url, notice: "招待メールを送信しました！"
@@ -31,11 +40,11 @@ class InvitationsController < ApplicationController
       render 'edit'
     elsif @invite_user.update_attributes(user_params)
       log_in @invite_user
-      inviter = Group.find(@invite_user.invited_by)
       @group_users = GroupUser.new
       @group_users.group_id = params['user'][:group_id]
       @group_users.user_id = params['user'][:user_id]
       if @group_users.save
+        session[:group_id] = @group_users.group_id
         flash[:success] = "ようこそ01Booksへ!"
         redirect_to @invite_user
       else
