@@ -14,11 +14,12 @@ class PerPersonExpenses extends React.Component {
       for (let expense in expenses) {
         sum_expense = sum_expense + expenses[expense].expense
       }
-      per_person = sum_expense / user_count
+      per_person = String(sum_expense / user_count).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+
     }
     return (
       <React.Fragment>
-        ¥{per_person}
+        1人あたり ¥ {per_person}
       </React.Fragment>
     );
   }
