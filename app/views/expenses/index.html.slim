@@ -1,6 +1,12 @@
 sass:
   .selectDate
     display: inline;
+sass:
+  .per_person
+    text-align: center;
+
+.col-auto
+  h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
   
 .ml-5.mt-5
   .selectDate.mr-5= link_to '＋', new_expense_path, class: 'btn btn-outline-secondary'

@@ -23,6 +23,7 @@ class ExpensesController < ApplicationController
       @search_date = Date.today
     end
     @expenses = Expense.joins(:group_expenses).where(group_expenses:{group_id:current_group.id}).where(expenses:{paid_at:@search_date.in_time_zone.all_month}).order("expense DESC")
+    @users = User.joins(:group_users).where(group_users: {group_id: current_group.id}).order("user_id ASC")
   end
 
   def show
