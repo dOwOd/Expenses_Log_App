@@ -5,10 +5,10 @@ sass:
   .per_person
     text-align: center;
 
-.col-auto
+.col-auto.mt-4
   h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
   
-.ml-5.mt-5
+.ml-5.mt-3
   .selectDate.mr-5= link_to '＋', new_expense_path, class: 'btn btn-outline-secondary'
   .ml-5.selectDate= link_to '＜', expenses_path(select_date: @search_date, months: 'prev'), class: 'btn btn-primary'
   h1.selectDate= @search_date.strftime(' %Y年%m月 ')
