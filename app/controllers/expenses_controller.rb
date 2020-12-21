@@ -1,6 +1,8 @@
 require 'date'
 
 class ExpensesController < ApplicationController
+  skip_before_action :join_required, only: [:index]
+  
   def index
     if params[:group_id] != nil
       session[:group_id] = params[:group_id]
