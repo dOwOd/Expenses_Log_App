@@ -4,6 +4,7 @@ class InvitationsController < ApplicationController
   before_action :valid_user,       only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
   skip_before_action :login_required, only: [:edit, :update]
+  skip_before_action :join_required, only: [:edit, :update]
 
   def new
   end
