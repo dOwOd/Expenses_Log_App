@@ -2,26 +2,20 @@
   ul#error_explanation
     - expense.errors.full_messages.each do |message|
       li= message
-      
-.modal.fade#new-expense-modal
-  .modal-dialog
-    .modal-content
-      .modal-header.d-block
-        h5.modal-title.text-center 経費の新規登録
-      .modal-body
-        = form_with model: expense, local: true do |f|
-          .form-group
-            = f.label :name
-            = f.text_field :name, class: 'form-control', id: 'expense_name', autocomplete: 'off'
-          .form-group
-            = f.label :expense
-            = f.text_field :expense, class: 'form-control', id: 'expense_expense', type: 'number', step: '1', autocomplete: 'off'
-          .form-group data-toggle='datetimepicker' data-target='#datetimepicker'
-            = f.label :paid_at
-            = f.text_field :paid_at, class: 'form-control datetimepicker-input', id: 'datetimepicker', autocomplete: 'off'
-          .form-group
-            = f.label :description
-            = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_descriptin', autocomplete: 'off'
-          = f.hidden_field :user_id, value: current_user.id
-          = f.hidden_field :group_ids, :multiple => true, value: current_group.id
-          = f.submit nil, class: 'btn btn-primary'
+
+= form_with model: expense, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'expense_name', autocomplete: 'off'
+  .form-group
+    = f.label :expense
+    = f.text_field :expense, class: 'form-control', id: 'expense_expense', type: 'number', step: '1', autocomplete: 'off'
+  .form-group data-toggle='datetimepicker' data-target='#datetimepicker'
+    = f.label :paid_at
+    = f.text_field :paid_at, class: 'form-control datetimepicker-input', id: 'datetimepicker', autocomplete: 'off'
+  .form-group
+    = f.label :description
+    = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_descriptin', autocomplete: 'off'
+  = f.hidden_field :user_id, value: current_user.id
+  = f.hidden_field :group_ids, :multiple => true, value: current_group.id
+  = f.submit nil, class: 'btn btn-primary'

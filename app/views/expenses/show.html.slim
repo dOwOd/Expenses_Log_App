@@ -24,6 +24,5 @@ table.table.table-hover
       th= Expense.human_attribute_name(:updated_at)
       td= @expense.updated_at
 
-= link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3', "data-toggle": "modal", "data-target": "#new-expense-modal"
-= render partial: 'form', locals: { expense: Expense.find(params[:id])}
+= link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3'
 = link_to '削除', @expense, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
