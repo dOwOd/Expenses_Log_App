@@ -8,7 +8,7 @@ sass:
 .col-auto.mt-4
   h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
   
-.ml-5.mt-3
+.mx-5.my-3
   .selectDate.mr-5= link_to '＋', new_expense_path, class: 'btn btn-outline-secondary', "data-toggle": "modal", "data-target": "#new-expense-modal"
   = render partial: 'form', locals: { expense: Expense.new}
   .ml-5.selectDate= link_to '＜', expenses_path(select_date: @search_date, months: 'prev'), class: 'btn btn-primary'
@@ -17,8 +17,8 @@ sass:
 
 .title.text-center 
 
-.col-auto.md-3.mt-4.row
-  table.table.table-hover.col-6.ml-5
+.col-auto.row
+  table.table.table-hover.col-6.mx-2
     thead.thead-default
       tr
         th= Expense.human_attribute_name(:name)
