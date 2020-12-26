@@ -19,10 +19,10 @@ class InvitationsController < ApplicationController
     else
       # 既にアカウント作成済みの場合(update -> メール送信)
       if @invite_user = User.find_by(email: params[:invitee][:email])
-        @invite_user.update(invited_by: current_group.id)
+        @invite_user.update(invited_by: current_group.id, inviter: current_user.id)
       # アカウント未作成の場合(create -> メール送信)
       else
-        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id)
+        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id, inviter: current_user.id)
       end
       
       @invite_user.create_invite_digest
@@ -44,10 +44,10 @@ class InvitationsController < ApplicationController
       @group_users = GroupUser.new
       @group_users.group_id = params['user'][:group_id]
       @group_users.user_id = params['user'][:user_id]
+      @group = Group.find_by(id: @group_users.group_id)
       if @group_users.save
         session[:group_id] = @group_users.group_id
-        flash[:success] = "ようこそ01Booksへ!"
-        redirect_to @invite_user
+        redirect_to root_url, notice: "#{@group.name}に参加しました。"
       else
         render 'edit'
       end
