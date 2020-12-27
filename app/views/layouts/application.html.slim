@@ -19,9 +19,9 @@ html
       .navbar-brand ExpensesLogApp
 
       ul.navbar-nav
-        - if current_user
+        - if current_user && current_group
           li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
-        - else
+        - elsif current_group == nil && current_user == nil
           li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
           li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
         - if current_group
