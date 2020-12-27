@@ -18,9 +18,9 @@ class PerPersonExpenses extends React.Component {
 
     }
     return (
-      <React.Fragment>
+      <div>
         1人あたり ¥ {per_person}
-      </React.Fragment>
+      </div>
     );
   }
 }
