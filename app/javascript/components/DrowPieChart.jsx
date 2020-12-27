@@ -44,6 +44,9 @@ class DrowPieChart extends React.Component {
         },
         maintainAspectRatio: false,
         responsive: false,
+        legend: {
+          display: false,
+        },
         tooltips: {
           mode: "label",
           callbacks: {
@@ -75,6 +78,7 @@ class DrowPieChart extends React.Component {
         tooltips: {
           enabled: false
         },
+        
         maintainAspectRatio: false,
         responsive: false,
         animation: {
@@ -118,7 +122,7 @@ Chart.pluginService.register({
 
     var text = "¥" + sum_expense,
         textX = Math.round((width - ctx.measureText(text).width) / 2),
-        textY = height / 1.875;
+        textY = height / 2;
 
     ctx.fillText(text, textX, textY);
     ctx.save();
