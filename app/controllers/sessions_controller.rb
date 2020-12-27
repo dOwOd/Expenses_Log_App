@@ -12,8 +12,10 @@ class SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       log_in user
       redirect_to groups_url, notice: 'ログインしました。'
+    elsif user == nil
+      redirect_to root_url, alert: 'メールアドレスが違います。'
     else
-      render :new
+      redirect_to root_url, alert: 'メールアドレスまたはパスワードが違います。'
     end
   end
 
