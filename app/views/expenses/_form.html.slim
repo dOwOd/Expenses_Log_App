@@ -7,7 +7,10 @@
   .modal-dialog
     .modal-content
       .modal-header.d-block
-        h5.modal-title.text-center 経費の新規登録
+        - if expense[:id] == nil
+          h5.modal-title.text-center 経費の新規登録
+        - else
+          h5.modal-title.text-center 経費の編集
       .modal-body
         = form_with model: expense, local: true do |f|
           .form-group
