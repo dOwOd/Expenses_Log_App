@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import CountUp from 'react-countup';
 
 let sum_expense = 0
 
@@ -14,12 +15,21 @@ class PerPersonExpenses extends React.Component {
       for (let expense in expenses) {
         sum_expense = sum_expense + expenses[expense].expense
       }
-      per_person = String(sum_expense / user_count).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
-
+      per_person = sum_expense / user_count
     }
     return (
       <div>
-        1人あたり ¥ {per_person}
+        <div className="per-person">
+          1人あたり
+        </div>
+        <div className="value">
+        ¥ 
+          <CountUp
+            separator=","
+            end={per_person}
+            duration={2}
+          />
+        </div>
       </div>
     );
   }
