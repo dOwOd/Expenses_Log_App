@@ -1,14 +1,17 @@
 .col-auto.mt-4
   h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
-  = link_to "/invitations/new", class: 'btn btn-lg btn-outline-secondary float-right'  do
+  = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary float-right'  do
     i.fas.fa-user-plus
   
 .mx-5.my-3
-  .selectDate.mr-5= link_to '＋', new_expense_path, class: 'btn btn-outline-secondary', "data-toggle": "modal", "data-target": "#new-expense-modal"
+  .selectDate.mr-5= link_to new_expense_path, class: 'btn btn-outline-secondary', "data-toggle": "modal", "data-target": "#new-expense-modal" do
+    i.fas.fa-plus
   = render partial: 'form', locals: { expense: Expense.new}
-  .ml-5.selectDate= link_to '＜', expenses_path(select_date: @search_date, months: 'prev'), class: 'btn btn-primary'
+  .ml-5.selectDate= link_to expenses_path(select_date: @search_date, months: 'prev'), class: 'btn btn-outline-primary' do
+    i.fas.fa-angle-double-left
   h1.selectDate= @search_date.strftime(' %Y年%m月 ')
-  = link_to '＞', expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-primary'
+  = link_to expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-outline-primary' do
+    i.fas.fa-angle-double-right
 
 .title.text-center 
 
