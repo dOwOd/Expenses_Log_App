@@ -1,5 +1,7 @@
 .col-auto.mt-4
   h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
+  = link_to "/invitations/new", class: 'btn btn-lg btn-outline-secondary float-right'  do
+    i.fas.fa-user-plus
   
 .mx-5.my-3
   .selectDate.mr-5= link_to '＋', new_expense_path, class: 'btn btn-outline-secondary', "data-toggle": "modal", "data-target": "#new-expense-modal"
