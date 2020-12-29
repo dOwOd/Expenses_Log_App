@@ -1,5 +1,8 @@
 @import "jquery-ui/theme";
 @import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
 
 .selectDate {
     display: inline;
