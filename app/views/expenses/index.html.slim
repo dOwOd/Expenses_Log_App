@@ -1,9 +1,12 @@
 .col-auto.mt-4
   h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
-  = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary float-right', "data-toggle": "modal", "data-target": "#new-invitation-modal" do
+  = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right', "data-toggle": "modal", "data-target": "#index-list-modal" do
+    i.fas.fa-users-cog
+  = render partial: 'list' 
+  = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#new-invitation-modal" do
     i.fas.fa-user-plus
   = render partial: 'invitate'
-  
+
 .mx-5.my-3
   .selectDate.mr-5= link_to new_expense_path, class: 'btn btn-outline-secondary', "data-toggle": "modal", "data-target": "#new-expense-modal" do
     i.fas.fa-plus
