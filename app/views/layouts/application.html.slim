@@ -24,8 +24,6 @@ html
         - elsif current_group == nil && current_user == nil
           li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
           li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
-        - if current_group
-          li.nav-item= link_to 'グループ設定', users_url, class: 'nav-link'
       ul.navbar-nav.ml-auto
         - if current_user
           li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
