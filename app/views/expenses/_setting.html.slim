@@ -4,13 +4,18 @@
       .modal-header.d-block
         h5.modal-title.text-center グループメンバー
       .modal-body
-        table.table.table-hover
-          thead.thead-default
-            tr
-              th= User.human_attribute_name(:name)
-              th
-          tbody
-            - @users.each do |user|
+        = form_with url: root_url do |form1|
+          table.table.table-hover
+            thead.thead-default
               tr
-                td= user.screen_name
-                td
+                th= User.human_attribute_name(:name)
+                th    
+              tbody
+                - @users.each do |user|
+                  = form_with model: user, local: true do |f|
+                    tr
+                      td= user.screen_name
+                      td= f.range_field :percentage_of_expenses, min: 0, max: 100
+                      td
+                        #hoge= '5' 
+          = form1.submit nil, class: 'btn btn-primary float-right'
