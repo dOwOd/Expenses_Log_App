@@ -15,7 +15,9 @@
                   = form_with model: user, local: true do |f|
                     tr
                       td= user.screen_name
-                      td= f.range_field :percentage_of_expenses, min: 0, max: 100
                       td
-                        #hoge= '5' 
+                        .range-slider
+                          = f.range_field :slider1, min: 0, max: 100, class: "slider-input"
+                          p.slider-value 50%
+                      td
           = form1.submit nil, class: 'btn btn-primary float-right'
