@@ -4,20 +4,19 @@
       .modal-header.d-block
         h5.modal-title.text-center グループメンバー
       .modal-body
-        = form_with url: root_url do |form1|
+        = form_with model: @settings, url: root_path do |form1|
           table.table.table-hover
             thead.thead-default
               tr
                 th= User.human_attribute_name(:name)
-                th    
-              tbody
-                - @users.each do |user|
-                  = form_with model: user, local: true do |f|
-                    tr
-                      td= user.screen_name
-                      td
-                        .range-slider
-                          = f.range_field :slider1, min: 0, max: 100, class: "slider-input"
-                          p.slider-value 50%
-                      td
+                th
+            tbody
+                - @settings.setting_users.each do |user|
+                  tr
+                    td= user.screen_name
+                    td
+                      .range-slider
+                        = form1.range_field :slider1, min: 0, max: 100, class: "slider-input"
+                        p.slider-value 50%
+                    td
           = form1.submit nil, class: 'btn btn-primary float-right'
