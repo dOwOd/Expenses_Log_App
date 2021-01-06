@@ -25,8 +25,9 @@ class ExpensesController < ApplicationController
       @search_date = Date.today
     end
     @expenses = Expense.joins(:group_expenses).where(group_expenses:{group_id:current_group.id}).where(expenses:{paid_at:@search_date.in_time_zone.all_month}).order("expense DESC")
-    @users = User.joins(:group_users).where(group_users: {group_id: current_group.id}).order("user_id ASC")
-    @settings = Form::UserCollectin.new(current_group.id)
+    @users 
+    @users = User.joins(:group_users).select("users.*, group_users.id AS group_users_id").where(group_users: {group_id: current_group.id}).order("user_id ASC")
+    @settings = Form::UserCollection.new(@users[0].group_users_id)
   end
 
   def show

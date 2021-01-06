@@ -11,7 +11,7 @@ class InvitationsController < ApplicationController
 
   def create
     if params[:invitee][:email].blank?
-      redirect_to new_invitation_url, notice: "メールアドレスを入力してください。"
+      redirect_to root_url, notice: "メールアドレスを入力してください。"
 
     elsif User.joins(:group_users).find_by(group_users: { group_id: current_group.id}, email: params[:invitee][:email]) != nil
       redirect_to new_invitation_url, notice: "そのメールアドレスはすでに招待済みです。"

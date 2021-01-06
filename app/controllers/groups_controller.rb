@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   include GroupsHelper
-  skip_before_action :join_required, only: [:index]
+  skip_before_action :join_required, only: [:index, :new, :create]
 
   def index
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
@@ -11,14 +11,21 @@ class GroupsController < ApplicationController
   
   def new
     @group = Group.new
-    @group.users << current_user  
+    @group.users << current_user
   end
 
   def create
     group = Group.new(group_params)
     if group.save
       join_group group
-      redirect_to root_path, notice: "グループ「」を作成しました。"
+      @user_setting = UserSetting.new
+      @user_setting.groups_users_id = group.group_users[0].id
+      @user_setting.percentage_of_expenses = 100
+      if @user_setting.save
+        redirect_to root_path, notice: "グループ「」を作成しました。"
+      else
+        render :new
+      end 
     else
       render :new
     end

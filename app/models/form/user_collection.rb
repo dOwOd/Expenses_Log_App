@@ -1,9 +1,9 @@
-class Form::UserCollectin < Form::Base
+class Form::UserCollection < Form::Base
   attr_accessor :setting_users
 
-  def initialize(group_id, attributes = {})
+  def initialize(group_users_id, attributes = {})
     super attributes
-    self.setting_users = UserSetting.joins("RIGHT OUTER JOIN group_users ON group_users.id = user_settings.group_user_id INNER JOIN users ON users.id = group_users.user_id").select("user_settings.*, users.*").where("group_users.group_id = ?", group_id).order("users.id ASC")
+    self.setting_users = UserSetting.joins("INNER JOIN group_users ON group_users.id = user_settings.groups_users_id INNER JOIN users ON users.id = group_users.user_id").select("user_settings.*, users.*").where("user_settings.groups_users_id = ?", group_users_id).order("users.id ASC")
   end
 
   # 上でsuper attributesとしているので必要
@@ -12,10 +12,8 @@ class Form::UserCollectin < Form::Base
   end
 
   def save
-    - binding.pry
+    binding.pry
     # 実際にやりたいことはこれだけ
-    # self.memos.map(&:save!)
-
     # 複数件全て保存できた場合のみ実行したいので、transactionを使用する
     UserSetting.transaction do
       self.users.map(&:save!)
