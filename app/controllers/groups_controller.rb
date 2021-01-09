@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
     if group.save
       join_group group
       @user_setting = UserSetting.new
-      @user_setting.groups_users_id = group.group_users[0].id
+      @user_setting.group_user_id = group.group_users[0].id
       @user_setting.percentage_of_expenses = 100
       if @user_setting.save
         redirect_to root_path, notice: "グループ「」を作成しました。"

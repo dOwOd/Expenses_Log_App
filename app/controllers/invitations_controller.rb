@@ -46,8 +46,15 @@ class InvitationsController < ApplicationController
       @group_users.user_id = params['user'][:user_id]
       @group = Group.find_by(id: @group_users.group_id)
       if @group_users.save
-        session[:group_id] = @group_users.group_id
-        redirect_to root_url, notice: "#{@group.name}に参加しました。"
+        @user_setting = UserSetting.new
+        @user_setting.group_user_id = @group_users.id
+        @user_setting.percentage_of_expenses = 0
+        if @user_setting.save
+          session[:group_id] = @group_users.group_id
+          redirect_to root_url, notice: "#{@group.name}に参加しました。"
+        else
+          render 'edit'  
+        end
       else
         render 'edit'
       end

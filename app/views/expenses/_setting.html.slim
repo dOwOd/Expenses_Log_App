@@ -4,21 +4,20 @@
       .modal-header.d-block
         h5.modal-title.text-center グループメンバー
       .modal-body
-        = form_with model: @settings, url: user_settings_path do |form1|
+        = form_with model: @settings, url: user_settings_path do |f|
           table.table.table-hover
             thead.thead-default
               tr
                 th= User.human_attribute_name(:name)
                 th
             tbody
-                - @settings.setting_users.each do |user|
-                  tr
-                    td= user.screen_name
-                    td
-                      .range-slider
-                        = form1.range_field :percentage_of_expenses, min: 0, max: 100, class: "slider-input", value: "#{user.percentage_of_expenses}"
-                        = form1.hidden_field :groups_users_id, value: user.groups_users_id
-                        p.slider-value ="#{user.percentage_of_expenses}%"
-                    td
-                    
-          = form1.submit nil, class: 'btn btn-primary float-right', onSubmit: 'CloseModal();'
+              - @setting_users.each do |users|
+                tr
+                  td= users.user.screen_name
+                  td
+                    .range-slider
+                      = f.range_field 'user_settings[percentage_of_expenses][]', min: 0, max: 100, class: "slider-input", value: "#{users.user_setting.percentage_of_expenses}"
+                      p.slider-value ="#{users.user_setting.percentage_of_expenses}%"
+                      = f.hidden_field 'user_settings[group_user_id][]', value: users.user_setting.group_user_id
+                  td
+          = f.submit nil, class: 'btn btn-primary float-right', onSubmit: 'CloseModal();'
