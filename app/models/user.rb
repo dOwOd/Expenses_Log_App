@@ -1,13 +1,14 @@
 class User < ApplicationRecord   
   has_many :group_users
   has_many :groups, through: :group_users
+  has_many :user_settings, through: :group_users
 
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, {presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true}
+  # validates :email, {presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true}
 
-  validates :screen_name, presence: true
+  # validates :screen_name, presence: true
   
 
   #:invite_tokenを追加。

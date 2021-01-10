@@ -1,0 +1,29 @@
+.modal.fade#index-setting-modal
+  .modal-dialog
+    .modal-content
+      .modal-header.d-block
+        h5.modal-title.text-center グループメンバー
+      .modal-body
+        = form_with model: @settings, url: user_settings_path do |f|
+          - if flash[:setting_alert].present?
+            .alert.alert-danger= flash[:setting_alert]
+            / エラー時にModalを再描画する処理
+            javascript:
+               $(function(){$('#index-setting-modal').modal('show');});
+              
+          table.table.table-hover
+            thead.thead-default
+              tr
+                th= User.human_attribute_name(:name)
+                th
+            tbody
+              - @setting_users.each do |users|
+                tr
+                  td= users.user.screen_name
+                  td
+                    .range-slider
+                      = f.range_field 'user_settings[percentage_of_expenses][]', min: 0, max: 100, class: "slider-input", value: "#{users.user_setting.percentage_of_expenses}"
+                      p.slider-value ="#{users.user_setting.percentage_of_expenses}%"
+                      = f.hidden_field 'user_settings[group_user_id][]', value: users.user_setting.group_user_id
+                  td
+          = f.submit nil, class: 'btn btn-primary float-right'

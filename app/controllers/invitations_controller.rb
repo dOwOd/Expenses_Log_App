@@ -11,7 +11,7 @@ class InvitationsController < ApplicationController
 
   def create
     if params[:invitee][:email].blank?
-      redirect_to new_invitation_url, notice: "メールアドレスを入力してください。"
+      redirect_to root_url, notice: "メールアドレスを入力してください。"
 
     elsif User.joins(:group_users).find_by(group_users: { group_id: current_group.id}, email: params[:invitee][:email]) != nil
       redirect_to new_invitation_url, notice: "そのメールアドレスはすでに招待済みです。"
@@ -46,8 +46,15 @@ class InvitationsController < ApplicationController
       @group_users.user_id = params['user'][:user_id]
       @group = Group.find_by(id: @group_users.group_id)
       if @group_users.save
-        session[:group_id] = @group_users.group_id
-        redirect_to root_url, notice: "#{@group.name}に参加しました。"
+        @user_setting = UserSetting.new
+        @user_setting.group_user_id = @group_users.id
+        @user_setting.percentage_of_expenses = 0
+        if @user_setting.save
+          session[:group_id] = @group_users.group_id
+          redirect_to root_url, notice: "#{@group.name}に参加しました。"
+        else
+          render 'edit'  
+        end
       else
         render 'edit'
       end

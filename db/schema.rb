@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_042127) do
+ActiveRecord::Schema.define(version: 2021_01_08_131348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 2020_12_26_042127) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_settings", force: :cascade do |t|
+    t.integer "percentage_of_expenses"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_user_id"
+    t.index ["group_user_id"], name: "index_user_settings_on_group_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "screen_name", null: false
     t.string "email", null: false
@@ -67,4 +75,5 @@ ActiveRecord::Schema.define(version: 2020_12_26_042127) do
   add_foreign_key "group_expenses", "groups"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "user_settings", "group_users"
 end
