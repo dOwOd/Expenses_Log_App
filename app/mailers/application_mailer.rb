@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'hoge'
+  default from: 'test.expenselogapp@gmail.com'
   layout 'mailer'
 end
