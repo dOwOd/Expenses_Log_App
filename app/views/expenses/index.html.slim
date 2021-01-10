@@ -1,5 +1,5 @@
 .col-auto.mt-4
-  h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, users: @users })
+  h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, percentage: @setting_user.user_setting.percentage_of_expenses })
   = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right', "data-toggle": "modal", "data-target": "#index-setting-modal" do
     i.fas.fa-users-cog
   = render partial: 'setting'
