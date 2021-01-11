@@ -57,8 +57,15 @@ class ExpensesController < ApplicationController
       expense.paid_at = Time.now
     end
 
-    expense.update!(expense_params)
-    redirect_to expenses_url, notice: "経費「#{expense.name}」を更新しました。"
+    @expense = Expense.new(expense_params)
+
+    if @expense.name.length > 30
+      flash[:expense_alert] = '名前は30文字以内で入力してください。'
+      redirect_to expenses_url
+    else
+      @expense.update!(expense_params)
+      redirect_to expenses_url, notice: "経費「#{@expense.name}」を更新しました。"
+    end
   end
 
   def destroy
