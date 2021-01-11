@@ -62,3 +62,4 @@ gem 'pry-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
+gem "nokogiri", ">= 1.11.0.rc4"
