@@ -22,7 +22,8 @@ class GroupsController < ApplicationController
       @user_setting.group_user_id = group.group_users[0].id
       @user_setting.percentage_of_expenses = 100
       if @user_setting.save
-        redirect_to root_path, notice: "グループ「」を作成しました。"
+        binding.pry
+        redirect_to root_path, notice: "グループ「#{group.name}」を作成しました。"
       else
         render :new
       end 
