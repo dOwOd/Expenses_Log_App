@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
   end
   
   def new
+    binding.pry
     @group = Group.new
     @group.users << current_user
   end
@@ -19,6 +20,7 @@ class GroupsController < ApplicationController
     if group.save
       join_group group
       @user_setting = UserSetting.new
+      binding.pry
       @user_setting.group_user_id = group.group_users[0].id
       @user_setting.percentage_of_expenses = 100
       if @user_setting.save
@@ -45,6 +47,7 @@ class GroupsController < ApplicationController
 
   private
   def group_params
+    binding.pry
     params.require(:group).permit(:name, user_ids: [] )
   end
 

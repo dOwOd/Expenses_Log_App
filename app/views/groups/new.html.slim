@@ -1,20 +1,12 @@
-.group-form
-  h1 グループ設定
-  = form_for @group do |f|
-    - if @group.errors.any?
-      .group-form__errors
-        h2= '# @group.errors.full_messages.count 件のエラーが発生しました。'
-        ul
-          - @group.errors.full_messages.each do |message|
-            li= message
-    .group-form__field
-      .group-form__field--left
-        = f.label :name, "グループ名", class: 'group-form__label'
-      .group-form__field--right
-        = f.text_field :name, class: 'chat__group_name group-form__input', placeholder: 'グループ名を入力してください'
-        = f.hidden_field :user_ids, :multiple => true, value: current_user.id
+.container.col-4.mt-5
+  h1 ユーザー登録
 
-    .group-form__field.clearfix
-      .group-form__field--left
-      .group-form__field--right
-        = f.submit class: 'group-form__action-btn'
+  = form_with model: @group, local: true do |f|
+    .form-group
+      = f.label :name, 'グループ名'
+      = f.text_field :name, class: 'form-control'
+      = f.hidden_field :user_ids, :multiple => true, value: current_user.id
+    .mt-3= f.submit class: 'btn btn-primary float-right'
+
+
+        
