@@ -82,7 +82,10 @@ class ExpensesController < ApplicationController
       @expense.paid_at = Time.now
     end
 
-    if @expense.save
+    if @expense.name.length > 30
+      flash[:expense_alert] = '名前は30文字以内で入力してください。'
+      redirect_to expenses_url
+    elsif @expense.save
       redirect_to expenses_url, notice: "経費「#{@expense.name}」を登録しました．"
     else
       render :new
