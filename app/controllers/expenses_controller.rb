@@ -90,7 +90,7 @@ class ExpensesController < ApplicationController
   end
 
   def auto_complete
-    suggest_expenses = Expense.joins(:group_expenses).select(:name).where("name LIKE?", "%" + params[:term] + "%").where(group_expenses:{group_id: current_group.id}).order(:name)
+    suggest_expenses = Expense.joins(:group_expenses).select(:name).where("name LIKE?", "%" + params[:term] + "%").where(group_expenses:{group_id: current_group.id}).order(:name).distinct
     suggest_expenses = suggest_expenses.map(&:name) 
     render json: suggest_expenses.to_json 
   end
