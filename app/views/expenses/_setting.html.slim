@@ -4,6 +4,7 @@
       .modal-header.d-block
         h5.modal-title.text-center グループメンバー
       .modal-body
+        - total_percentage = 0
         = form_with model: @settings, url: user_settings_path do |f|
           - if flash[:setting_alert].present?
             .alert.alert-danger= flash[:setting_alert]
@@ -25,5 +26,11 @@
                       = f.range_field 'user_settings[percentage_of_expenses][]', min: 0, max: 100, class: "slider-input", value: "#{users.user_setting.percentage_of_expenses}"
                       p.slider-value ="#{users.user_setting.percentage_of_expenses}%"
                       = f.hidden_field 'user_settings[group_user_id][]', value: users.user_setting.group_user_id
+                      - total_percentage = total_percentage + users.user_setting.percentage_of_expenses
                   td
+          .sum_parent
+            p.sum_txt
+                |合計
+            p.sum_value
+              |#{total_percentage}%
           = f.submit nil, class: 'btn btn-primary float-right'
