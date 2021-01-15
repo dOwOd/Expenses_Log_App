@@ -28,7 +28,7 @@ html
         - if current_user
           li.nav-item= link_to logout_path, class: 'nav-link', "data-toggle": "modal", "data-target": "#logout-modal" do
             i.fas.fa-sign-out-alt
-          = render partial: 'logout'
+          = render partial: '/layouts/logout'
 
   .container.col-10.mt-3
     - if flash.notice.present?
