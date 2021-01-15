@@ -26,7 +26,9 @@ html
           li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
       ul.navbar-nav.ml-auto
         - if current_user
-          li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+          li.nav-item= link_to logout_path, class: 'nav-link', "data-toggle": "modal", "data-target": "#logout-modal" do
+            i.fas.fa-sign-out-alt
+          = render partial: 'logout'
 
   .container.col-10.mt-3
     - if flash.notice.present?
