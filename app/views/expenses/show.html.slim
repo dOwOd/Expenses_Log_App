@@ -7,6 +7,9 @@
         th= Expense.human_attribute_name(:expense)
         td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
       tr
+        th= '支払い者'
+        td= @expense.screen_name
+      tr
         th= Expense.human_attribute_name(:paid_at)
         th= @expense.paid_at.strftime('%Y-%m-%d')
       tr

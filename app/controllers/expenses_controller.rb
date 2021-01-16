@@ -31,7 +31,7 @@ class ExpensesController < ApplicationController
   end
 
   def show
-    @expense = Expense.find(params[:id])
+    @expense = User.joins(:expenses).select("users.screen_name, expenses.*").find_by(expenses: { id: params[:id]})
   end
 
   def new
