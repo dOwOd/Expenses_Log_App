@@ -19,16 +19,19 @@
             javascript:
                $(function(){$('#new-expense-modal').modal('show');});
           .form-group
-            = f.label :name
+            .text-left= f.label :name
             = f.text_field :name, class: 'form-control', id: 'expense_name', autocomplete: 'off'
           .form-group
-            = f.label :expense
+            .text-left= f.label :expense
             = f.text_field :expense, class: 'form-control', id: 'expense_expense', type: 'number', step: '1', autocomplete: 'off'
-          .form-group data-toggle='datetimepicker' data-target='#datetimepicker'
-            = f.label :paid_at
-            = f.text_field :paid_at, class: 'form-control datetimepicker-input', id: 'datetimepicker', autocomplete: 'off'
           .form-group
-            = f.label :description
+            .text-left= f.label :paid_at
+            - if expense[:id] == nil
+              = f.date_field :paid_at, class: 'form-control', id: 'datetimepicker', value: Time.now.strftime("%Y-%m-%d")
+            - else
+              = f.date_field :paid_at, class: 'form-control', id: 'datetimepicker', value: expense.paid_at.strftime("%Y-%m-%d")
+          .form-group
+            .text-left= f.label :description
             = f.text_area :description, rows: 5, class: 'form-control', id: 'expense_descriptin', autocomplete: 'off'
           = f.hidden_field :user_id, value: current_user.id
           = f.hidden_field :group_ids, :multiple => true, value: current_group.id
