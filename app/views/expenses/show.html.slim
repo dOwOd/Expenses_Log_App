@@ -1,29 +1,27 @@
-h1  経費の詳細
+.container.col-6.mt-5
+  h1  経費の詳細
 
-table.table.table-hover
-  tbody
-    tr
-      th= Expense.human_attribute_name(:id)
-      td= @expense.id
-    tr
-      th= Expense.human_attribute_name(:name)
-      td= @expense.name
-    tr
-      th= Expense.human_attribute_name(:expense)
-      td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
-    tr
-      th= Expense.human_attribute_name(:paid_at)
-      th= @expense.paid_at.strftime('%Y-%m-%d')
-    tr
-      th= Expense.human_attribute_name(:description)
-      td= simple_format(h(@expense.description), {}, sanitize: false, wrapper_tag: "div")
-    tr
-      th= Expense.human_attribute_name(:created_at)
-      td= @expense.created_at
-    tr
-      th= Expense.human_attribute_name(:updated_at)
-      td= @expense.updated_at
-
-= link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3', "data-toggle": "modal", "data-target": "#new-expense-modal"
-= render partial: 'form', locals: { expense: Expense.find(params[:id])}
-= link_to '削除', @expense, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
+  table.table.table-hover
+    tbody
+      tr
+        th= Expense.human_attribute_name(:expense)
+        td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
+      tr
+        th= '支払い者'
+        td= @expense.screen_name
+      tr
+        th= Expense.human_attribute_name(:paid_at)
+        th= @expense.paid_at.strftime('%Y-%m-%d')
+      tr
+        th= Expense.human_attribute_name(:description)
+        td= simple_format(h(@expense.description), {}, sanitize: false, wrapper_tag: "div")
+      tr
+        th= Expense.human_attribute_name(:created_at)
+        td= @expense.created_at.strftime('%Y-%m-%d')
+      tr
+        th= Expense.human_attribute_name(:updated_at)
+        td= @expense.updated_at.strftime('%Y-%m-%d')
+  .show-button
+    = link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3', "data-toggle": "modal", "data-target": "#new-expense-modal"
+    = render partial: 'form', locals: { expense: Expense.find(params[:id])}
+    = link_to '削除', @expense, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
