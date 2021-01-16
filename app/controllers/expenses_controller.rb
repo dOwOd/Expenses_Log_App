@@ -43,22 +43,7 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    expense = Expense.find(params[:id])
-    
-    if !expense.name.present?
-      expense.name = "名称未設定"
-    end 
-
-    if !expense.expense.present?
-      expense.expense =groups 0
-    end
-
-    if !expense.paid_at.present?
-      expense.paid_at = Time.now
-    end
-
-    @expense = Expense.new(expense_params)
-
+    @expense = Expense.find(params[:id])
     if @expense.name.length > 30
       flash[:expense_alert] = '名前は30文字以内で入力してください。'
       redirect_to expenses_url
@@ -108,7 +93,7 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    params.require(:expense).permit(:name, :expense, :paid_at, :description, :user_id,  group_ids: [] )
+    params.require(:expense).permit(:id, :name, :expense, :paid_at, :description, :user_id,  group_ids: [] )
   end
 
   def group_params
