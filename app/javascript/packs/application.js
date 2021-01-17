@@ -24,3 +24,8 @@ require('../move_range_value')
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
+
+// フラッシュメッセージをフェードアウトさせる
+$(function(){
+    setTimeout("$('.alert.alert-success').fadeOut('slow')", 2000);
+  });
