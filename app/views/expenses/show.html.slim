@@ -27,4 +27,4 @@
   .show-button
     = link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3', "data-toggle": "modal", "data-target": "#new-expense-modal"
     = render partial: 'form', locals: { expense: Expense.find(params[:id])}
-    = link_to '削除', @expense, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
+    = link_to '削除', destroy_expenses_url, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
