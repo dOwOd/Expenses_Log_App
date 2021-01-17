@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  delete '/expenses/:id', to: 'expenses#destroy', as: :destroy_expenses
+
   resources :users
   delete '/users/:group_id/:user_id', to: 'users#destroy', as: :remove
   root to: 'expenses#index'
