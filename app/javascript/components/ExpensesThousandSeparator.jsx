@@ -3,9 +3,11 @@ import PropTypes from "prop-types"
 class ExpensesThousandSeparator extends React.Component {
   render () {
     return (
-        <React.Fragment>
-            ¥{(this.props.expense).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
-        </React.Fragment>
+      <div>
+        <h4 className="mt-1 mb-0">
+          ¥{(this.props.expense).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}          
+        </h4>
+      </div>
       );
   }
 }

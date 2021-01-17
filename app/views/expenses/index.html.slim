@@ -20,21 +20,15 @@
   = link_to expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-outline-primary' do
     i.fas.fa-angle-double-right
 
-.title.text-center 
-
-.col-auto.row
-  table.table.table-hover.col-6.mx-2
-    thead.thead-default
-      tr
-        th= Expense.human_attribute_name(:name)
-        th= Expense.human_attribute_name(:expense)
-        th= Expense.human_attribute_name(:paid_at)
-        th 
-    tbody
+.index-body.center-block
+  - if @expenses != []
+    .col-6
       - @expenses.each do |expense|
-        tr
-          td= link_to expense.name, expense
-          td= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
-          td= expense.paid_at.strftime('%Y-%m-%d')
-  .col-5
-    = react_component("DrowPieChart", { expenses: @expenses})
+        .card.rounded-lg.mx-2.my-2
+          = link_to expense, class: "card-body text-dark" do
+              p.text-left.mb-1= '支払日 ' + expense.paid_at.strftime('%Y-%m-%d')
+              h4.card-title.my-0.ml-3= expense.name
+              .text-right= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
+
+  .col-6
+      = react_component("DrowPieChart", { expenses: @expenses})
