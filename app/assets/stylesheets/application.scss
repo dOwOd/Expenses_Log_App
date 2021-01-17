@@ -66,3 +66,63 @@
 .show-button {
    text-align: right;
 }
+
+#cars {
+   display: inline-block;
+ }
+
+ .card-context {
+   display: inline-flex;
+ }
+
+ .index-body{
+   display: flex;
+ }
+
+
+
+ // マウスホバー時の下線を非表示
+ a:hover {
+   text-decoration: none;
+ }
+
+ .card{
+   position: relative;
+   z-index: 0;
+ }
+ 
+ // caedにマウスホバー時のグラーデーション処理
+ .card-body.text-dark {
+   background: #fff;
+   border-radius: 2px;
+   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .11);
+   color: #fff;
+   display: inline-block;
+   padding: 16px 24px;
+   position: relative;
+   transition: .3s cubic-bezier(.4, 0, .2, 1);
+ }
+
+ .card-body.text-dark:hover {
+   background: transparent;
+ }
+
+ .card-body.text-dark:after {
+   background: linear-gradient(45deg, #B2FEFA, #0ED2F7);
+   border-radius: 2px;
+   bottom: 0;
+   content: '';
+   left: 0;
+   position: absolute;
+   right: 0;
+   top: 0;
+   z-index: -1;
+ }
+
+ .card-title.my-0 {
+    color: #2c3e50;
+ }
+
+ .mt-1.mb-0 {
+   color: #2c3e50;
+ }
