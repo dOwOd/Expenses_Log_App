@@ -4,6 +4,9 @@
   table.table.table-hover
     tbody
       tr
+        th= '経費名称'
+        td= @expense.name
+      tr
         th= Expense.human_attribute_name(:expense)
         td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
       tr
