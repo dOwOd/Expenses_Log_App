@@ -6,6 +6,11 @@ table.table.table-hover
     tr
       th= Group.human_attribute_name(:name)
       th
+
+  = link_to new_group_path, class: 'btn btn-secondary float-right', "data-toggle": "modal", "data-target": "#new-group-modal", rel: "noopener noreferrer"do
+    i.fas.fa-plus.fa-2x
+  = render partial: 'new'
+  
   tbody
     - @groups.each do |group|
       tr
