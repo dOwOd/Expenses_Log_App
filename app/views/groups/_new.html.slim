@@ -1,0 +1,12 @@
+.modal.fade#new-group-modal
+  .modal-dialog
+    .modal-content
+      .modal-header.d-block
+        h5.modal-title.text-center  グループを作成する
+      .modal-body
+        = form_with model: @group, local: true do |f|
+          .form-group
+            = f.label :name, 'グループ名'
+            = f.text_field :name, class: 'form-control'
+            = f.hidden_field :user_ids, :multiple => true, value: current_user.id
+          .mt-3= f.submit class: 'btn btn-primary float-right'
