@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
+    @members = GroupUser.where(group_id: @groups.ids)
     if @groups == []
       redirect_to new_group_path
     end

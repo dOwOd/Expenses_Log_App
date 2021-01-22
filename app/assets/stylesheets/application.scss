@@ -133,3 +133,34 @@
    margin-bottom: 0;
    width: 80%;
  }
+
+ .card-body.text-dark.groups {
+   background: #fff;
+   border-radius: 2px;
+   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .11);
+   color: #fff;
+   display: inline-block;
+   padding: 16px 24px;
+   position: relative;
+   transition: .3s cubic-bezier(.4, 0, .2, 1);
+ }
+
+ .card-body.text-dark.groups:hover {
+   background: transparent;
+ }
+
+ .card-body.text-dark.groups:after {
+   background: linear-gradient(45deg, #a8ff78, #78ffd6);
+   border-radius: 2px;
+   bottom: 0;
+   content: '';
+   left: 0;
+   position: absolute;
+   right: 0;
+   top: 0;
+   z-index: -1;
+ }
+
+ .card-body.text-dark.groups {
+    font-size: 25px;
+ }

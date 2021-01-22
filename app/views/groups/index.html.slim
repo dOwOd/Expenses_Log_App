@@ -1,17 +1,11 @@
-h1 グループ一覧
-
-.mb-3
-table.table.table-hover
-  thead.thead-default
-    tr
-      th= Group.human_attribute_name(:name)
-      th
-
-  = link_to new_group_path, class: 'btn btn-secondary float-right', "data-toggle": "modal", "data-target": "#new-group-modal", rel: "noopener noreferrer"do
-    i.fas.fa-plus.fa-2x
+.container.col-7.mt-3
+  .text-center.h1 グループ一覧
+  = link_to new_group_path, class: 'btn btn-secondary float-right', "data-toggle": "modal", "data-target": "#new-group-modal", rel: "noopener noreferrer" do
+      i.fas.fa-plus.fa-2x
   = render partial: 'new'
-  
-  tbody
+
+  .container.col-10.mt-3
     - @groups.each do |group|
-      tr
-        td= link_to group.name, expenses_path(select_date: @search_date, months: 'home', group_id: group.id)
+      .card.rounded-lg.mx-2.my-2.float-none
+        =link_to group.name, expenses_path(select_date: @search_date, months: 'home', group_id: group.id), class: "card-body text-dark groups"
+        .text-right.my-2.mr-2= "メンバー数 #{@members.where(group_id: group.id).count}人"
