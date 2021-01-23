@@ -20,9 +20,10 @@ html
       ul.navbar-nav.mr-auto
         - if current_user && current_group
           li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
-        - if current_user == nil
-          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
+        - if params[:controller] == "sessions"
           li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
+        - elsif params[:controller] == "users"
+          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替" data-target="#navbarNav" data-toggle="collapse" type="button" 
         span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
