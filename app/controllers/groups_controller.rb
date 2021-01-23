@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   skip_before_action :join_required, only: [:index, :new, :create]
 
   def index
+    session[:group_id] = nil
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
     @members = GroupUser.where(group_id: @groups.ids)
     if @groups == []
