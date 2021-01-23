@@ -14,21 +14,22 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': false
-  body#expense-modal
-    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
+  body
+    .app-title.navbar.navbar-light
       .navbar-brand ExpensesLogApp
-
-      ul.navbar-nav
-        - if current_user && current_group
-          li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
-        - elsif current_user == nil
-          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
-          li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
-      ul.navbar-nav.ml-auto
-        - if current_user
-          li.nav-item= link_to logout_path, class: 'nav-link', "data-toggle": "modal", "data-target": "#logout-modal" do
-            i.fas.fa-sign-out-alt
-          = render partial: '/layouts/logout'
+      button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替" data-target="#navbarNav" data-toggle="collapse" type="button" 
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav.ml-auto
+          li.nav-item
+          - if current_user == nil
+            li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
+            li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
+        ul.navbar-nav.ml-auto
+          - if current_user
+            li.nav-item= link_to logout_path, class: 'nav-link', "data-toggle": "modal", "data-target": "#logout-modal" do
+              i.fas.fa-sign-out-alt
+            = render partial: '/layouts/logout'
 
   .container.col-10.mt-3
     = yield
