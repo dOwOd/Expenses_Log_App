@@ -1,6 +1,5 @@
 .container.col-6.mt-5
   h1  経費の詳細
-
   table.table.table-hover
     tbody
       tr
@@ -11,7 +10,10 @@
         td= react_component("ExpensesThousandSeparator", { expense: "#{@expense.expense}" })
       tr
         th= '支払い者'
-        td= @expense.screen_name
+        - if @expense.screen_name == nil
+          td.text-secondary.text= '脱退したユーザ'
+        - else
+          td= @expense.screen_name
       tr
         th= Expense.human_attribute_name(:paid_at)
         th= @expense.paid_at.strftime('%Y-%m-%d')
