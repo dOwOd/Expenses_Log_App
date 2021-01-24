@@ -14,4 +14,5 @@
       = f.password_field :password_confirmation, class: "form-control"
       = f.hidden_field :group_id, value: @invite_user.invited_by
       = f.hidden_field :user_id, value: @invite_user.id
+      = f.hidden_field :is_used, value: true
       = f.submit "登録", class: "btn btn-primary"
