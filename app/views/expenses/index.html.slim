@@ -20,7 +20,7 @@
   = link_to expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-outline-primary' do
     i.fas.fa-angle-double-right
 
-.index-body.center-block
+.index-body
   - if @expenses != []
     .col-6
       - @expenses.each do |expense|
@@ -29,6 +29,11 @@
               p.text-left.mb-1= '支払日 ' + expense.paid_at.strftime('%Y-%m-%d')
               h4.card-title.my-0.ml-3= expense.name
               .text-right= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
-
-  .col-6
+    .col-6
       = react_component("DrowPieChart", { expenses: @expenses})
+  - else
+    .col-6.d-flex.align-items-center.justify-content-center
+      h2= "まだ経費が登録されていません。"
+    .col-6
+      .float-right
+        = react_component("DrowPieChart", { expenses: @expenses})
