@@ -45,6 +45,12 @@ class GroupsController < ApplicationController
     @groups = Groups.find(params[:id])
   end 
 
+  def destroy
+    group = Group.find(params[:id])
+    group.destroy
+    redirect_to groups_url, notice: "グループ「#{group.name}」を削除しました。"
+  end 
+
   private
   def group_params
     params.permit(:name, user_ids: [] )
