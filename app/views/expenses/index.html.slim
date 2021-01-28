@@ -31,9 +31,15 @@
               .text-right= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
     .col-6
       = react_component("DrowPieChart", { expenses: @expenses})
+      = link_to new_invitation_path, class: 'btn btn-dark float-right mr-3', "data-toggle": "modal", "data-target": "#config-modal" do
+        i.fas.fa-cogs
+      = render partial: 'config'
   - else
     .col-6.d-flex.align-items-center.justify-content-center
       h2= "まだ経費が登録されていません。"
     .col-6
       .float-right
         = react_component("DrowPieChart", { expenses: @expenses})
+        = link_to new_invitation_path, class: 'btn btn-dark float-right mr-3', "data-toggle": "modal", "data-target": "#config-modal" do
+          i.fas.fa-cogs
+        = render partial: 'config'

@@ -4,8 +4,12 @@
       i.fas.fa-plus.fa-2x
   = render partial: 'new'
 
-  .container.col-10.mt-3
-    - @groups.each do |group|
-      .card.rounded-lg.mx-2.my-2.float-none
-        =link_to group.name, expenses_path(select_date: @search_date, months: 'home', group_id: group.id), class: "card-body text-dark groups"
-        .text-right.my-2.mr-2= "メンバー数 #{@members.where(group_id: group.id).count}人"
+  .container.col-12.mt-3
+    - if @groups.count > 0
+      .container.col-11.mt-3
+        - @groups.each do |group|
+          .card.rounded-lg.mx-2.my-2.float-none
+            =link_to group.name, expenses_path(select_date: @search_date, months: 'home', group_id: group.id), class: "card-body text-dark groups"
+            .text-right.my-2.mr-2= "メンバー数 #{@members.where(group_id: group.id).count}人"
+    - else
+      h2.mt-5#index-group-text= "グループがまだ登録されていません。"
