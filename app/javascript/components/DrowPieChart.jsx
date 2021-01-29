@@ -60,10 +60,8 @@ class DrowPieChart extends React.Component {
         }
       }
     } else {
-      console.log(datasets)
       datasets = []
       datasets.push(100)
-      console.log(datasets)
       /** グラフデータ */
       graphData = {
         // 軸ラベル
