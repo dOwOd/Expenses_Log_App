@@ -9,7 +9,7 @@ class DrowPieChart extends React.Component {
   render () {
     const expenses = this.props.expenses
     let labels = []
-    const datasets = []
+    let datasets = []
     sum_expense = 0
     const canvasWidth = 650
     const convasHeight = 650
@@ -22,7 +22,8 @@ class DrowPieChart extends React.Component {
         labels.push(expenses[expense].name)
         sum_expense = sum_expense + expenses[expense].expense
       }
-      
+    }
+    if (sum_expense > 0) {
       /** グラフデータ */
       graphData = {
         // 軸ラベル
@@ -59,7 +60,10 @@ class DrowPieChart extends React.Component {
         }
       }
     } else {
+      console.log(datasets)
+      datasets = []
       datasets.push(100)
+      console.log(datasets)
       /** グラフデータ */
       graphData = {
         // 軸ラベル
@@ -72,11 +76,13 @@ class DrowPieChart extends React.Component {
           },
         ],
       };
-      console.log(graphData.datasets)
 
       graphOption = {
         tooltips: {
           enabled: false
+        },
+        legend: {
+          display: false,
         },
         
         maintainAspectRatio: false,
