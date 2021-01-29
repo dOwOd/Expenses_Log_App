@@ -18,8 +18,6 @@ html
     .app-title.navbar.navbar-light
       .navbar-brand ExpensesLogApp
       ul.navbar-nav.mr-auto
-        - if current_user && current_group
-          li.nav-item= link_to 'Home', expenses_path(select_date: @search_date, months: 'home'), class: 'nav-link'
         - if params[:controller] == "sessions"
           li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
         - elsif params[:controller] == "users"
