@@ -1,14 +1,5 @@
 .col-auto.mt-4
   h1.per_person= react_component("PerPersonExpenses", { expenses: @expenses, percentage: @setting_user.user_setting.percentage_of_expenses })
-  = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right', "data-toggle": "modal", "data-target": "#index-setting-modal" do
-    i.fas.fa-users-cog
-  = render partial: 'setting'
-  = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#index-list-modal" do
-    i.fas.fa-user-friends
-  = render partial: 'list' 
-  = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#new-invitation-modal" do
-    i.fas.fa-user-plus
-  = render partial: 'invitate'
 
 .mx-5.my-3
   .selectDate.mr-5= link_to new_expense_path, class: 'btn btn-outline-secondary', "data-toggle": "modal", "data-target": "#new-expense-modal" do
@@ -19,6 +10,15 @@
   h1.selectDate= @search_date.strftime(' %Y年%m月 ')
   = link_to expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-outline-primary' do
     i.fas.fa-angle-double-right
+  = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right', "data-toggle": "modal", "data-target": "#index-setting-modal" do
+    i.fas.fa-users-cog
+  = render partial: 'setting'
+  = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#index-list-modal" do
+    i.fas.fa-user-friends
+  = render partial: 'list' 
+  = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#new-invitation-modal" do
+    i.fas.fa-user-plus
+  = render partial: 'invitate'
 
 .index-body
   - if @expenses != []
@@ -29,17 +29,20 @@
               p.text-left.mb-1= '支払日 ' + expense.paid_at.strftime('%Y-%m-%d')
               h4.card-title.my-0.ml-3= expense.name
               .text-right= react_component("ExpensesThousandSeparator", { expense: "#{expense.expense}" })
-    .col-6
+    .col-5
+      
       = react_component("DrowPieChart", { expenses: @expenses})
+    .col-1.config-btn
       = link_to new_invitation_path, class: 'btn btn-dark float-right mr-3', "data-toggle": "modal", "data-target": "#config-modal" do
         i.fas.fa-cogs
       = render partial: 'config'
   - else
     .col-6.d-flex.align-items-center.justify-content-center
-      h2= "まだ経費が登録されていません。"
-    .col-6
+      h2.mt-5= "まだ経費が登録されていません。"
+    .col-5
       .float-right
         = react_component("DrowPieChart", { expenses: @expenses})
-        = link_to new_invitation_path, class: 'btn btn-dark float-right mr-3', "data-toggle": "modal", "data-target": "#config-modal" do
-          i.fas.fa-cogs
-        = render partial: 'config'
+    .col-1.config-btn
+      = link_to new_invitation_path, class: 'btn btn-dark float-right mr-3', "data-toggle": "modal", "data-target": "#config-modal" do
+        i.fas.fa-cogs
+      = render partial: 'config'
