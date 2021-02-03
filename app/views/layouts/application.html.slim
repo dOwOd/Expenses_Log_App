@@ -10,6 +10,7 @@ html
     script defer="defer" src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"
     title
       | ExpensesLogApp
+    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -19,13 +20,17 @@ html
       .navbar-brand ExpensesLogApp
       ul.navbar-nav.mr-auto
         - if params[:controller] == "sessions"
-          li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link'
+          li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin mobile'
         - elsif params[:controller] == "users"
-          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link'
+          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin mobile'
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替" data-target="#navbarNav" data-toggle="collapse" type="button" 
         span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
         ul.navbar-nav.text-right
+          - if params[:controller] == "sessions"
+            li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin pc'
+          - elsif params[:controller] == "users"
+            li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin pc'
           - if current_user && current_group
             li.nav-item= link_to groups_url, class: 'nav-link'do
               = "グループ一覧 "

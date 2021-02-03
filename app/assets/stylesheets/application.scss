@@ -90,7 +90,7 @@
    position: relative;
    z-index: 0;
  }
- 
+
  // caedにマウスホバー時のグラーデーション処理
  .card-body.text-dark {
    background: #fff;
@@ -201,4 +201,37 @@
    position:fixed;
    right:50px;
    bottom:50px;
+ }
+
+ // PCサイズ用
+ @media (min-width: 992px) {
+   #card-container {
+      width: 800px;
+   }
+ }
+
+ @media (min-width: 545px) {
+   .nav-link.login_singin.pc{
+      display: none;
+   }
+ }
+
+ // モバイルサイズ用
+ @media (max-width: 544px) {
+   .nav-link.login_singin.mobile{
+      display: none;
+   }
+    
+   #add_group_btn {
+      position:fixed;
+      right:0px;
+      bottom:50px;
+   }
+   .card-body.text-dark.groups {
+      font-size: 120%;
+   }
+
+   #card-container {
+      width: 100%;
+   }
  }
