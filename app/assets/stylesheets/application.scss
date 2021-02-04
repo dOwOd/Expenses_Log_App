@@ -204,12 +204,6 @@
  }
 
  // PCサイズ用
- @media (min-width: 992px) {
-   #card-container {
-      width: 800px;
-   }
- }
-
  @media (min-width: 545px) {
    .nav-link.login_singin.pc{
       display: none;
@@ -221,6 +215,10 @@
    .nav-link.login_singin.mobile{
       display: none;
    }
+
+   #group-index {
+      font-size: 175%;
+   }
     
    #add_group_btn {
       position:fixed;
@@ -228,10 +226,6 @@
       bottom:50px;
    }
    .card-body.text-dark.groups {
-      font-size: 120%;
-   }
-
-   #card-container {
-      width: 100%;
+      font-size: 100%;
    }
  }

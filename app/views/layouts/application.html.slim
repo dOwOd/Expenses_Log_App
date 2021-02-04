@@ -41,7 +41,7 @@ html
               i.fas.fa-sign-out-alt
             = render partial: '/layouts/logout'
 
-  .container.col-10.mt-3
+  .container.col-xs-12.col-sm-10.mt-3
     = yield
     - if flash.notice.present?
       footer.alert.alert-success= flash.notice
