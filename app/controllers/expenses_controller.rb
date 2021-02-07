@@ -40,11 +40,11 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    @expense = Expense.find(params[:id])
+    @expense = Expense.friendly.find(params[:id])
   end
 
   def update
-    @expense = Expense.find(params[:id])
+    @expense = Expense.friendly.find(params[:id])
     if @expense.name.length > 30
       flash[:expense_alert] = '名前は30文字以内で入力してください。'
       redirect_to expenses_url
@@ -55,7 +55,7 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    expense = Expense.find(params[:id])
+    expense = Expense.friendly.find(params[:id])
     expense.destroy
     redirect_to expenses_url, notice: "経費「#{expense.name}」を削除しました。"
   end
