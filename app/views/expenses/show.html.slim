@@ -30,5 +30,5 @@
     = link_to root_path, class: 'btn btn-outline-dark float-left' do
       i.fas.fa-undo-alt
     = link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3', "data-toggle": "modal", "data-target": "#new-expense-modal"
-    = render partial: 'form', locals: { expense: Expense.find(params[:id])}
+    = render partial: 'form', locals: { expense: Expense.friendly.find(params[:id])}
     = link_to '削除', destroy_expenses_url, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'

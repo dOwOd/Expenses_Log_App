@@ -32,7 +32,7 @@ class ExpensesController < ApplicationController
   end
 
   def show
-    @expense = Expense.joins("LEFT OUTER JOIN users ON users.id = expenses.user_id").select("users.screen_name, expenses.*").find_by(expenses: { id: params[:id]})
+    @expense = Expense.friendly.joins("LEFT OUTER JOIN users ON users.id = expenses.user_id").select("users.screen_name, expenses.*").find_by(expenses: { friendly_url: params[:id]})
   end
 
   def new
@@ -62,6 +62,17 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(expense_params)
+    
+    friendly_url = ''
+    # 重複のないfriendly_urlを生成するまでループ
+    loop do
+      char_list = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+      friendly_url = (0...8).map { char_list[rand(char_list.length)] }.join
+      if Expense.friendly.find_by(friendly_url: friendly_url) == nil
+        break
+      end
+    end
+    @expense.friendly_url = friendly_url
 
     if !@expense.name.present?
       @expense.name = "名称未設定"
