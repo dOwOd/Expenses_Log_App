@@ -12,6 +12,7 @@ require("@rails/activestorage").start()
 require("channels")
 require('../suggest')
 require('../move_range_value')
+require('../hide_footer')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

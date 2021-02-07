@@ -11,8 +11,13 @@ class DrowPieChart extends React.Component {
     let labels = []
     let datasets = []
     sum_expense = 0
-    const canvasWidth = 650
-    const convasHeight = 650
+    let canvasWidth = 650
+    let convasHeight = 650 
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      // モバイル時用処理
+      canvasWidth = window.parent.screen.width * 0.85
+      convasHeight = window.parent.screen.width * 0.85
+    }
     let graphData
     let graphOption
 
@@ -102,6 +107,7 @@ class DrowPieChart extends React.Component {
           options={graphOption}
           width={canvasWidth}
           height={convasHeight}
+          margin='auto'
           />
       </div>
     );
@@ -110,7 +116,7 @@ class DrowPieChart extends React.Component {
 
 DrowPieChart.propTypes = {
   expenses: PropTypes.array.isRequired,
-};
+}
 export default DrowPieChart
 
 Chart.pluginService.register({
@@ -119,16 +125,26 @@ Chart.pluginService.register({
         height = chart.chart.height,
         ctx = chart.chart.ctx;
 
-    ctx.restore();
-    var fontSize = (height / 300).toFixed(2);
-    ctx.font = fontSize + "em sans-serif";
-    ctx.textBaseline = "middle";
+    ctx.restore()
+
+    var fontSize = 0
+
+    // ホントは画面サイズによって柔軟にフォントサイズを変えたい，，，
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      // モバイル時用処理
+      fontSize = (height / 225).toFixed(2)
+    } else{
+      fontSize = (height / 300).toFixed(2)
+    }
+
+    ctx.font = fontSize + "em sans-serif"
+    ctx.textBaseline = "middle"
 
     var text = "¥" + sum_expense,
         textX = Math.round((width - ctx.measureText(text).width) / 2),
-        textY = height / 2;
+        textY = height / 2
 
-    ctx.fillText(text, textX, textY);
-    ctx.save();
+    ctx.fillText(text, textX, textY)
+    ctx.save()
   }
-});
+})
