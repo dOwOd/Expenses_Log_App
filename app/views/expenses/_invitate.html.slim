@@ -1,4 +1,4 @@
-.modal.fade#new-invitation-modal
+.modal.fade.new-invitation-modal
   .modal-dialog
     .modal-content
       .modal-header.d-block
@@ -6,7 +6,7 @@
       .modal-body
         = form_for(:invitee, url:invitations_path) do |f|
           .form-group
-            = f.label :email
+            .text-left= f.label 'メールアドレス'
             = f.email_field :email, class: 'form-control'
           .form-group
             = f.submit "招待メールを送信", class: "btn btn-primary float-right"

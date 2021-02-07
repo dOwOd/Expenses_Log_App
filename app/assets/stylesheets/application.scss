@@ -204,15 +204,7 @@
    text-align: center;
  }
 
- // 設定エリア
- .button-for-pc.col-md-3.col-xl-6{
-   text-align: right;
- }
-
  @media (min-width: 769px) {
-   .button-for-mobile {
-      display: none;
-   }
    .expenses-mobile {
       display: none;
    }
@@ -225,6 +217,11 @@
    }
    .select_date_wrapper.col-xs-auto.col-sm-6.col-md-9.text-nowrap{
       text-align: left;
+   }
+
+   // 設定エリア(確認する
+   .button-list{
+      text-align: right;
    }
 
    // 経費追加, 月変更ボタン
@@ -246,23 +243,27 @@
 
  // モバイルサイズ用(sm)
  @media (max-width: 768px) {
-   .button-for-pc{
-      display: none;
-   }
    // ボタンを下に移動させる
    .btn.btn-lg.btn-outline-secondary.float-right.mr-3 {
       position: fixed;
       bottom: 50;
-      z-index: 1051;
    }
-   .footer {
+
+   .button-list {
       background: #2c3e50;
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 10%;
+      z-index: 1051;
+
+      transition-property: opacity; 
+      transition-duration: 0.3s;
+
+      opacity: 1;
    }
+
    .nav-link.login_singin.mobile{
       display: none;
    }
@@ -312,11 +313,6 @@
       opacity: 1;
    }
 
-   // 下部ボタンリスト
-   .button-for-mobile {
-      text-align: center;
-   }
-
    .col-12.expenses-mobile, 
       .col-auto {
          padding: 0%;
@@ -328,5 +324,10 @@
    .DrowPieChart,
     canvas{
       margin: auto;
+   }
+
+   .modal.fade.new-invitation-modal {
+      top:  0px;
+      left: 0px;
    }
  }
