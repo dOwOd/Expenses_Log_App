@@ -92,6 +92,8 @@ GEM
     ffi (1.13.1)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     haml (5.2.1)
@@ -261,6 +263,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   font-awesome-sass
+  friendly_id
   haml2slim
   html2slim
   jbuilder (~> 2.7)
