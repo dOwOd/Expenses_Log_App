@@ -13,7 +13,7 @@ class DrowPieChart extends React.Component {
     sum_expense = 0
     let canvasWidth = 650
     let convasHeight = 650 
-    if (window.matchMedia('(max-width: 767px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       // モバイル時用処理
       canvasWidth = window.parent.screen.width * 0.85
       convasHeight = window.parent.screen.width * 0.85

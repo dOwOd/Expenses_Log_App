@@ -16,19 +16,19 @@
     .selectDate= link_to expenses_path(select_date: @search_date, months: 'next'), class: 'btn btn-outline-primary' do
       i.fas.fa-angle-double-right
 
-  .button-for-pc.col-md-3.col-xl-6
-    = link_to new_invitation_path, class: 'btn btn-lg btn-dark float-right', "data-toggle": "modal", "data-target": "#config-modal" do
-      i.fas.fa-cogs
-    = render partial: 'config'
-    = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#index-setting-modal" do
-      i.fas.fa-users-cog
-    = render partial: 'setting'
-    = link_to users_url, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#index-list-modal" do
-      i.fas.fa-user-friends
-    = render partial: 'list' 
-    = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary float-right mr-3', "data-toggle": "modal", "data-target": "#new-invitation-modal" do
+  .button-list.col-sx-12.col-sm-6.text-nowrap
+    = link_to new_invitation_path, class: 'btn btn-lg btn-info mx-3 mt-2', "data-toggle": "modal", "data-target": ".new-invitation-modal" do
       i.fas.fa-user-plus
     = render partial: 'invitate'
+    = link_to users_url, class: 'btn btn-lg btn-info mx-3 mt-2', "data-toggle": "modal", "data-target": "#index-list-modal" do
+      i.fas.fa-user-friends
+    = render partial: 'list' 
+    = link_to users_url, class: 'btn btn-lg btn-info mx-3 mt-2', "data-toggle": "modal", "data-target": "#index-setting-modal" do
+      i.fas.fa-users-cog
+    = render partial: 'setting'
+    = link_to new_invitation_path, class: 'btn btn-lg btn-dark mx-3 mt-2', "data-toggle": "modal", "data-target": "#config-modal" do
+      i.fas.fa-cogs
+    = render partial: 'config'
 
 .index-body
   / PC用 ------------------------------------------------------------------
@@ -67,20 +67,3 @@
       .col-auto
         = react_component("DrowPieChart", { expenses: @expenses})
   / モバイル用 --------------------------------------------------------------
-
-.footer
-  .button-for-mobile
-    = link_to new_invitation_path, class: 'btn btn-lg btn-outline-secondary mx-3 mt-2', "data-toggle": "modal", "data-target": "#new-invitation-modal" do
-      i.fas.fa-user-plus
-    = render partial: 'invitate'
-    = link_to users_url, class: 'btn btn-lg btn-outline-secondary mx-3 mt-2', "data-toggle": "modal", "data-target": "#index-list-modal" do
-      i.fas.fa-user-friends
-    = render partial: 'list' 
-    = link_to users_url, class: 'btn btn-lg btn-outline-secondary mx-3 mt-2', "data-toggle": "modal", "data-target": "#index-setting-modal" do
-      i.fas.fa-users-cog
-    = render partial: 'setting'
-    = link_to new_invitation_path, class: 'btn btn-lg btn-dark mx-3 mt-2', "data-toggle": "modal", "data-target": "#config-modal" do
-      i.fas.fa-cogs
-    = render partial: 'config'
-    
-    

@@ -4,6 +4,9 @@
       .modal-header.d-block
         h5.modal-title.text-center 設定項目
       .modal-body
-        = form_with model: @group, local: true do |f|
-          = "グループの削除"
-          = link_to '削除する', group_path(current_group.id), data: { confirm: "グループ「#{@group.name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right', rel: "noopener noreferrer"
+        table.table.table-hover
+          tbody
+            = form_with model: @group, local: true do |f|
+              tr.group-delete.mx-auto
+                td.text-left= "グループの削除"
+                td= link_to '削除する', group_path(current_group.id), data: { confirm: "グループ「#{@group.name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right', rel: "noopener noreferrer"
