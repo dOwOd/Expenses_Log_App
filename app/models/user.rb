@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
   # validates :screen_name, presence: true
   
+  include FriendlyId
+  friendly_id :friendly_url
+  validates :friendly_url, length: { in: 0..8 },
+                         uniqueness: true
 
   #:invite_tokenを追加。
   attr_accessor :remember_token, :activation_token, :reset_token, :invite_token

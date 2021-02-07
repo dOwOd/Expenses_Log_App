@@ -21,6 +21,6 @@
                 - per_person_expense = (total_expense * (setting_user.user_setting.percentage_of_expenses * 0.01)).to_i
                 td.text-left= "¥#{per_person_expense.to_s(:delimited)}"
                 - if setting_user.user.id == current_user.id
-                  td= link_to '削除', remove_path(group_id: current_group.id, user_id: current_user.id), data: { confirm: "グループから「#{setting_user.user.screen_name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right'
+                  td= link_to '削除', remove_path(group_id: current_group.id, user_id: current_user.friendly_url), data: { confirm: "グループから「#{setting_user.user.screen_name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right'
                 - else
                   td=
