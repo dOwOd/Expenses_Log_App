@@ -7,7 +7,7 @@
         - total_percentage = 0
         = form_with model: @settings, url: user_settings_path do |f|
           - if flash[:setting_alert].present?
-            .alert.alert-danger= flash[:setting_alert]
+            .alert.alert-danger.text-left= flash[:setting_alert]
             / エラー時にModalを再描画する処理
             javascript:
                $(function(){$('#index-setting-modal').modal('show');});
