@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_095037) do
+ActiveRecord::Schema.define(version: 2021_02_07_140742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2021_02_07_095037) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "friendly_url"
+    t.index ["friendly_url"], name: "index_groups_on_friendly_url", unique: true
   end
 
   create_table "user_settings", force: :cascade do |t|
