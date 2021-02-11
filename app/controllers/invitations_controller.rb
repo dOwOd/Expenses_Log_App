@@ -54,19 +54,30 @@ class InvitationsController < ApplicationController
   def update
     if params[:is_used] # 既存ユーザの場合
       log_in @invite_user
-      @group_users = GroupUser.new
-      @group_users.group_id = @invite_user.invited_by
-      @group_users.user_id = @invite_user.id
-      @group_users.save!
 
-      @user_setting = UserSetting.new
-      @user_setting.group_user_id = @group_users.id
-      @user_setting.percentage_of_expenses = 0
-      @user_setting.save!
+      # 未登録であった場合に更新
+      if GroupUser.find_by(group_id: @invite_user.invited_by, user_id: @invite_user.id) == nil
+        @group_users = GroupUser.new
+        @group_users.group_id = @invite_user.invited_by
+        @group_users.user_id = @invite_user.id
+        @group_users.save!
+  
+        @user_setting = UserSetting.new
+        @user_setting.group_user_id = @group_users.id
+        @user_setting.percentage_of_expenses = 0
+        @user_setting.save!
 
-      @group = Group.find_by(id: @group_users.group_id)
-      session[:group_id] = @group.friendly_url
-      redirect_to root_url, notice: "#{@group.name}に参加しました。"
+        @group = Group.find_by(id: @group_users.group_id)
+        session[:group_id] = @group.friendly_url
+        redirect_to root_url, notice: "#{@group.name}に参加しました。"
+      else
+
+        # 招待リンクを再度踏まれたときの処理
+        @group = Group.find_by(id: @invite_user.invited_by)
+        session[:group_id] = @group.friendly_url
+        redirect_to root_url, notice: "#{@group.name}に既に参加しています．"
+      end
+      
     else # 初期ユーザの場合
       if params[:user][:password].empty?
         @invite_user.errors.add(:password, :blank)
