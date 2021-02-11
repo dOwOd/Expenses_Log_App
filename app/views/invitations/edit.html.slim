@@ -1,18 +1,17 @@
-- provide(:title, "Reset password")
-.row.box
-  h3
-    | アカウントを設定する
-  .col-md-6.col-md-offset-3
-    = form_for(@invite_user, url: invitation_path(params[:id])) do |f|
-      / = render "shared/error_messages", object: f.object
-      = hidden_field_tag :email, @invite_user.email
+.container.col-xs-11.col-md-6.col-lg-5.col-xl-4.mt-5
+  h3 アカウントを設定する
+  = form_with model: @invite_user, url: invitation_path(params[:id]), local: true do |f|
+    = hidden_field_tag :email, @invite_user.email
+    .form-group
       = f.label :name, "名前"
       = f.text_field :screen_name, class: "form-control"
+    .form-group
       = f.label :password, "パスワード"
       = f.password_field :password, class: "form-control"
+    .form-group
       = f.label :password_confirmation, "パスワードの確認"
       = f.password_field :password_confirmation, class: "form-control"
       = f.hidden_field :group_id, value: @invite_user.invited_by
       = f.hidden_field :user_id, value: @invite_user.id
       = f.hidden_field :is_used, value: true
-      = f.submit "登録", class: "btn btn-primary"
+    = f.submit "登録", class: "btn btn-primary float-right"
