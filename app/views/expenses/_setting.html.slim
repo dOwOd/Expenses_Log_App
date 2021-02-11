@@ -23,8 +23,8 @@
                   td.text-left= users.user.screen_name
                   td
                     .range-slider
+                      p.slider-value ="#{users.user_setting.percentage_of_expenses}%"
                       = f.range_field 'user_settings[percentage_of_expenses][]', min: 0, max: 100, class: "slider-input", value: "#{users.user_setting.percentage_of_expenses}"
-                      p.slider-value.ml-2 ="#{users.user_setting.percentage_of_expenses}%"
                       = f.hidden_field 'user_settings[group_user_id][]', value: users.user_setting.group_user_id
                       - total_percentage = total_percentage + users.user_setting.percentage_of_expenses
           .sum_parent
