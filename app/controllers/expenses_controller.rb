@@ -9,23 +9,19 @@ class ExpensesController < ApplicationController
     end
 
     if params[:select_date] == nil
-      @search_date = Date.today
-    elsif !params[:select_date].kind_of?(Date)
-      @search_date = params[:select_date].to_date
+      @selected_month = Date.today.beginning_of_month
     else
-      @search_date = params[:select_date]
-    end
+      if date_valid?(params[:select_date])
+        @selected_month = Date.parse(params[:select_date])
+      else
+        @selected_month = Date.today.beginning_of_month
+      end
+    end    
+    @last_month = @selected_month.prev_month(1)
+    @next_month = @selected_month.next_month(1)
 
-    case params[:months]
-    when 'prev'
-      @search_date = @search_date.prev_month(1)
-    when 'next'
-      @search_date = @search_date.next_month(1)
-    else
-      @search_date = Date.today.beginning_of_month
-    end
     @group = Group.find_by(friendly_url: current_group.friendly_url)
-    @expenses = Expense.joins(:group_expenses).where(group_expenses:{group_id:current_group.id}).where(expenses:{paid_at:@search_date.in_time_zone.all_month}).order("expense DESC")
+    @expenses = Expense.joins(:group_expenses).where(group_expenses:{group_id:current_group.id}).where(expenses:{paid_at: @selected_month.in_time_zone.all_month}).order("expense DESC")
     @users = User.joins(:group_users).select("users.*, group_users.id AS group_users_id").where(group_users: {group_id: current_group.id}).order("user_id ASC")
     @setting_users = GroupUser.joins(:user_setting, :user, :group).where(group_id: current_group.id).order(group_user_id: "ASC")
     @setting_user = @setting_users.find_by(user_id: current_user.id)
@@ -112,4 +108,8 @@ class ExpensesController < ApplicationController
     params.require(:group).permit(:id)
   end 
 
+  # params[:select_date]が正しい日付かチェック
+  def date_valid?(str)
+    !! Date.parse(str) rescue false
+  end
 end

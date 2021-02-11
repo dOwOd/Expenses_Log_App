@@ -8,12 +8,12 @@
       i.fas.fa-plus
     = render partial: 'form', locals: { expense: Expense.new}
     / 先月表示ボタン
-    .selectDate= link_to expenses_list_url(group_id: current_group.friendly_url, select_date: @search_date, months: 'prev'), class: 'btn btn-outline-primary' do
+    .selectDate= link_to expenses_list_url(group_id: current_group.friendly_url, select_date: @last_month), class: 'btn btn-outline-primary' do
       i.fas.fa-angle-double-left
     / 選択月
-    h1.selectDate= @search_date.strftime(' %Y年%m月 ')
+    h1.selectDate= @selected_month.strftime(' %Y年%m月 ')
     / 来月表示ボタン
-    .selectDate= link_to expenses_list_url(group_id: current_group.friendly_url, select_date: @search_date, months: 'next'), class: 'btn btn-outline-primary' do
+    .selectDate= link_to expenses_list_url(group_id: current_group.friendly_url, select_date: @next_month), class: 'btn btn-outline-primary' do
       i.fas.fa-angle-double-right
 
   .button-list.col-sx-12.col-sm-6.text-nowrap
