@@ -14,7 +14,7 @@ class InvitationsController < ApplicationController
       redirect_to root_url, notice: "メールアドレスを入力してください。"
 
     elsif User.joins(:group_users).find_by(group_users: { group_id: current_group.id}, email: params[:invitee][:email]) != nil
-      redirect_to new_invitation_url, notice: "そのメールアドレスはすでに招待済みです。"
+      redirect_to root_url, notice: "そのメールアドレスはすでに招待済みです。"
 
     else
       # 既にアカウント作成済みの場合(update -> メール送信)
@@ -58,7 +58,6 @@ class InvitationsController < ApplicationController
       @group_users.group_id = @invite_user.invited_by
       @group_users.user_id = @invite_user.id
       @group_users.save!
-      session[:group_id] = @group_users.group_id
 
       @user_setting = UserSetting.new
       @user_setting.group_user_id = @group_users.id
@@ -66,6 +65,7 @@ class InvitationsController < ApplicationController
       @user_setting.save!
 
       @group = Group.find_by(id: @group_users.group_id)
+      session[:group_id] = @group.friendly_url
       redirect_to root_url, notice: "#{@group.name}に参加しました。"
     else # 初期ユーザの場合
       if params[:user][:password].empty?
@@ -83,7 +83,7 @@ class InvitationsController < ApplicationController
           @user_setting.percentage_of_expenses = 0
 
           if @user_setting.save
-            session[:group_id] = @group_users.group_id
+            session[:group_id] = @group.friendly_url
             redirect_to root_url, notice: "#{@group.name}に参加しました。"
           else
             render 'edit'  
