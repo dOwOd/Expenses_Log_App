@@ -13,9 +13,11 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to groups_url, notice: 'ログインしました。'
     elsif user == nil
-      redirect_to root_url, alert: 'メールアドレスが違います。'
+      flash[:login_alert] = 'メールアドレスが違います。'
+      redirect_to root_url
     else
-      redirect_to root_url, alert: 'メールアドレスまたはパスワードが違います。'
+      flash[:login_alert] = 'メールアドレスまたはパスワードが違います。'
+      redirect_to root_url
     end
   end
 
