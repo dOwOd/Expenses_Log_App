@@ -39,8 +39,8 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.friendly.find_by(friendly_url: params[:user_id])
-    # group = Groups.friendly.find_by(group_friendly_url: params[:group_friendly_url])
-    group_users = GroupUser.find_by(group_id: params[:group_id], user_id: user.id)
+    group = Group.friendly.find_by(friendly_url: params[:group_id])
+    group_users = GroupUser.find_by(group_id: group.id, user_id: user.id)
     group_users.destroy
     redirect_to groups_url, notice: 'グループから抜けました。'
   end

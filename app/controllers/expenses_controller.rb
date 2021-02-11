@@ -21,10 +21,10 @@ class ExpensesController < ApplicationController
       @search_date = @search_date.prev_month(1)
     when 'next'
       @search_date = @search_date.next_month(1)
-    when 'home'
-      @search_date = Date.today
+    else
+      @search_date = Date.today.beginning_of_month
     end
-    @group = Group.find(current_group.id)
+    @group = Group.find_by(friendly_url: current_group.friendly_url)
     @expenses = Expense.joins(:group_expenses).where(group_expenses:{group_id:current_group.id}).where(expenses:{paid_at:@search_date.in_time_zone.all_month}).order("expense DESC")
     @users = User.joins(:group_users).select("users.*, group_users.id AS group_users_id").where(group_users: {group_id: current_group.id}).order("user_id ASC")
     @setting_users = GroupUser.joins(:user_setting, :user, :group).where(group_id: current_group.id).order(group_user_id: "ASC")

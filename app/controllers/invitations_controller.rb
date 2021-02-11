@@ -22,7 +22,16 @@ class InvitationsController < ApplicationController
         @invite_user.update(invited_by: current_group.id, inviter: current_user.id, is_used: true)
       # アカウント未作成の場合(create -> メール送信)
       else
-        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id, inviter: current_user.id, is_used: false)
+        friendly_url = ''
+        # 重複のないfriendly_urlを生成するまでループ
+        loop do
+          char_list = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+          friendly_url = (0...8).map { char_list[rand(char_list.length)] }.join
+          if User.friendly.find_by(friendly_url: friendly_url) == nil
+            break
+          end
+        end
+        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id, inviter: current_user.id, is_used: false, friendly_url: friendly_url)
       end
       
       @invite_user.create_invite_digest
