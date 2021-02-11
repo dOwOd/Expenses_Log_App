@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get "auto_complete" 
     end 
   end
-  get '/expenses/:select_date/:months', to: 'expenses#index'
+  get '/expenses/:group_id/:select_date/:months', to: 'expenses#index', as: :expenses_list
   resources :groups do
     resources :groups_users, only: [:new, :create, :edit, :update]
   end 
