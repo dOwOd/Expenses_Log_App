@@ -10,7 +10,7 @@
     - if @groups.count > 0
       - @groups.each do |group|
         .card.rounded-lg.my-2
-          =link_to group.name, expenses_path(select_date: @search_date, months: 'home', group_id: group.id), class: "card-body text-dark groups"
+          =link_to group.name, expenses_list_url(group_id: group.friendly_url, select_date: @search_date, months: 'tomonth'), class: "card-body text-dark groups"
           .text-right.my-2.mr-2= "メンバー数 #{@members.where(group_id: group.id).count}人"
     - else
       h2.mt-5#index-group-text= "グループがまだ登録されていません。"

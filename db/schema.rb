@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_24_015047) do
+ActiveRecord::Schema.define(version: 2021_02_07_140742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2021_01_24_015047) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "paid_at", null: false
     t.bigint "user_id", null: false
+    t.string "friendly_url"
+    t.index ["friendly_url"], name: "index_expenses_on_friendly_url", unique: true
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
@@ -48,6 +50,8 @@ ActiveRecord::Schema.define(version: 2021_01_24_015047) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "friendly_url"
+    t.index ["friendly_url"], name: "index_groups_on_friendly_url", unique: true
   end
 
   create_table "user_settings", force: :cascade do |t|
@@ -69,7 +73,9 @@ ActiveRecord::Schema.define(version: 2021_01_24_015047) do
     t.datetime "invite_sent_at"
     t.integer "inviter"
     t.boolean "is_used"
+    t.string "friendly_url"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["friendly_url"], name: "index_users_on_friendly_url", unique: true
   end
 
   add_foreign_key "group_expenses", "expenses"

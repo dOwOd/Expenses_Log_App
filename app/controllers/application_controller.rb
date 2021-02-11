@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_group
-    @current_group = Group.find_by(id: session[:group_id])
+    @current_group = Group.friendly.find_by(friendly_url: session[:group_id])
   end
 
   def login_required

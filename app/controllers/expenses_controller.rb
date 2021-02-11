@@ -21,10 +21,10 @@ class ExpensesController < ApplicationController
       @search_date = @search_date.prev_month(1)
     when 'next'
       @search_date = @search_date.next_month(1)
-    when 'home'
-      @search_date = Date.today
+    else
+      @search_date = Date.today.beginning_of_month
     end
-    @group = Group.find(current_group.id)
+    @group = Group.find_by(friendly_url: current_group.friendly_url)
     @expenses = Expense.joins(:group_expenses).where(group_expenses:{group_id:current_group.id}).where(expenses:{paid_at:@search_date.in_time_zone.all_month}).order("expense DESC")
     @users = User.joins(:group_users).select("users.*, group_users.id AS group_users_id").where(group_users: {group_id: current_group.id}).order("user_id ASC")
     @setting_users = GroupUser.joins(:user_setting, :user, :group).where(group_id: current_group.id).order(group_user_id: "ASC")
@@ -32,7 +32,7 @@ class ExpensesController < ApplicationController
   end
 
   def show
-    @expense = Expense.joins("LEFT OUTER JOIN users ON users.id = expenses.user_id").select("users.screen_name, expenses.*").find_by(expenses: { id: params[:id]})
+    @expense = Expense.friendly.joins("LEFT OUTER JOIN users ON users.id = expenses.user_id").select("users.screen_name, expenses.*").find_by(expenses: { friendly_url: params[:id]})
   end
 
   def new
@@ -40,11 +40,11 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    @expense = Expense.find(params[:id])
+    @expense = Expense.friendly.find(params[:id])
   end
 
   def update
-    @expense = Expense.find(params[:id])
+    @expense = Expense.friendly.find(params[:id])
     if @expense.name.length > 30
       flash[:expense_alert] = '名前は30文字以内で入力してください。'
       redirect_to expenses_url
@@ -55,13 +55,24 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    expense = Expense.find(params[:id])
+    expense = Expense.friendly.find(params[:id])
     expense.destroy
     redirect_to expenses_url, notice: "経費「#{expense.name}」を削除しました。"
   end
 
   def create
     @expense = Expense.new(expense_params)
+    
+    friendly_url = ''
+    # 重複のないfriendly_urlを生成するまでループ
+    loop do
+      char_list = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+      friendly_url = (0...8).map { char_list[rand(char_list.length)] }.join
+      if Expense.friendly.find_by(friendly_url: friendly_url) == nil
+        break
+      end
+    end
+    @expense.friendly_url = friendly_url
 
     if !@expense.name.present?
       @expense.name = "名称未設定"
