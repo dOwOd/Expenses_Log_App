@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   def index
     session[:group_id] = nil
     @groups = Group.joins(:group_users).where(group_users: {user_id: current_user.id}).order("group_id ASC")
-    @search_date = Date.today.beginning_of_month
+    @selected_month = Date.today.beginning_of_month
     @members = GroupUser.where(group_id: @groups.ids)
   end
   
