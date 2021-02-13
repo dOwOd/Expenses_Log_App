@@ -7,6 +7,9 @@
   .modal-dialog
     .modal-content
       .modal-header.d-block
+        button type="button" class="close" aria-label="Close" data-dismiss="modal"
+          span aria-hidden="true"
+            | &times;
         - if expense[:id] == nil
           h5.modal-title.text-center 経費の新規登録
         - else

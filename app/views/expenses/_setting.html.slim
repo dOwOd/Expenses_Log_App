@@ -2,6 +2,9 @@
   .modal-dialog
     .modal-content
       .modal-header.d-block
+        button type="button" class="close" aria-label="Close" data-dismiss="modal"
+          span aria-hidden="true"
+            | &times;
         h5.modal-title.text-center グループメンバー
       .modal-body
         - total_percentage = 0
