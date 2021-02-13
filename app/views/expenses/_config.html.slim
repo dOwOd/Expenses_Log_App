@@ -9,4 +9,4 @@
             = form_with model: @group, local: true do |f|
               tr.group-delete.mx-auto
                 td.text-left= "グループの削除"
-                td= link_to '削除する', group_path(current_group.id), data: { confirm: "グループ「#{@group.name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right', rel: "noopener noreferrer"
+                td= button_to '削除する', group_path(current_group.friendly_url), data: { confirm: "グループ「#{@group.name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right', rel: "noopener noreferrer"

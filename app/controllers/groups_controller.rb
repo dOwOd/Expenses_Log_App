@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  protect_from_forgery
   include GroupsHelper
   skip_before_action :join_required, only: [:index, :new, :create]
 
@@ -56,7 +57,7 @@ class GroupsController < ApplicationController
   end 
 
   def destroy
-    group = Group.find(params[:id])
+    group = Group.find_by(friendly_url: params[:id])
     group.destroy
     session[:group_id] = nil
     redirect_to groups_url, notice: "グループ「#{group.name}」を削除しました。"
