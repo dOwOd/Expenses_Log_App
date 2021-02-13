@@ -1,7 +1,10 @@
 .modal.fade.new-invitation-modal
-  .modal-dialog
+  .modal-dialog data-keyboard="true" tabindex="-1"
     .modal-content
       .modal-header.d-block
+        button type="button" class="close" aria-label="Close" data-dismiss="modal"
+          span aria-hidden="true"
+            | &times;
         h5.modal-title.text-center  友人を招待する
       .modal-body
         = form_for(:invitee, url:invitations_path) do |f|

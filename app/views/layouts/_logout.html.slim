@@ -2,6 +2,9 @@
   .modal-dialog
     .modal-content
       .modal-header.d-block
-            h5.modal-title.text-center ログアウトしますか？
+        button type="button" class="close" aria-label="Close" data-dismiss="modal"
+          span aria-hidden="true"
+            | &times;
+        h5.modal-title.text-center ログアウトしますか？
       .modal-body
         = link_to 'ログアウト', logout_path, method: :delete, class: 'btn btn-danger float-right'
