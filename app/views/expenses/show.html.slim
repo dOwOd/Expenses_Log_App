@@ -1,5 +1,5 @@
-.container.col-6.mt-5
-  h1  経費の詳細
+.container.col-xs-auto.col-sm-6.col-md-9.col-xl-6.my-2
+  h3  経費の詳細
   table.table.table-hover
     tbody
       tr
@@ -31,4 +31,4 @@
       i.fas.fa-undo-alt
     = link_to '編集', edit_expense_path, class: 'btn btn-primary mr-3', "data-toggle": "modal", "data-target": "#new-expense-modal"
     = render partial: 'form', locals: { expense: Expense.friendly.find(params[:id])}
-    = link_to '削除', destroy_expenses_url, method: :delete, data: { confirm: "タスク「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
+    = link_to '削除', destroy_expenses_url, method: :delete, data: { confirm: "経費「#{@expense.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
