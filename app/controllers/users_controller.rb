@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
   before_action :login_required, except: [:new, :create]
   before_action :join_required, except: [:new, :create]
 
@@ -12,8 +13,7 @@ class UsersController < ApplicationController
     friendly_url = ''
     # 重複のないfriendly_urlを生成するまでループ
     loop do
-      char_list = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
-      friendly_url = (0...8).map { char_list[rand(char_list.length)] }.join
+      friendly_url = generate_friendly_url
       if Expense.friendly.find_by(friendly_url: friendly_url) == nil
         break
       end

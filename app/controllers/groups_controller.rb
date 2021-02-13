@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   protect_from_forgery
   include GroupsHelper
+  include ApplicationHelper
   skip_before_action :join_required, only: [:index, :new, :create]
 
   def index
@@ -21,8 +22,7 @@ class GroupsController < ApplicationController
     friendly_url = ''
     # 重複のないfriendly_urlを生成するまでループ
     loop do
-      char_list = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
-      friendly_url = (0...8).map { char_list[rand(char_list.length)] }.join
+      friendly_url = generate_friendly_url
       if Group.friendly.find_by(friendly_url: friendly_url) == nil
         break
       end
