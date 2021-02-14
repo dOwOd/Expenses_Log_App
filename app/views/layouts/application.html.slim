@@ -16,7 +16,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': false
   body
-    .app-title.navbar.navbar-light
+    .app-title.navbar.navbar-dark.bg-dark
       .navbar-brand ExpensesLogApp
       ul.navbar-nav.mr-auto
         - if params[:controller] == "sessions"
@@ -31,7 +31,7 @@ html
             li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin pc'
           - elsif params[:controller] == "users"
             li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin pc'
-          - if current_user && current_group
+          - elsif params[:controller] == "expenses"
             li.nav-item= link_to groups_url, class: 'nav-link'do
               = "グループ一覧 "
               i.fas.fa-sign-out-alt
