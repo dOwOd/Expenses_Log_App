@@ -16,22 +16,24 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': false
   body
-    .app-title.navbar.navbar-dark.bg-dark
+    .app-title.navbar.navbar-dark.bg-dark.navbar-expand-md
       .navbar-brand ExpensesLogApp
       ul.navbar-nav.mr-auto
-        - if params[:controller] == "sessions"
+        li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin mobile'
+        - if params[:controller] == "sessions" || params[:controller] == 'howtouse'
           li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin mobile'
-        - elsif params[:controller] == "users"
+        - elsif params[:controller] == "users" || params[:controller] == 'howtouse'
           li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin mobile'
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替" data-target="#navbarNav" data-toggle="collapse" type="button" 
         span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
         ul.navbar-nav.text-right
-          - if params[:controller] == "sessions"
+          li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin pc'
+          - if params[:controller] == "sessions" || params[:controller] == 'howtouse'
             li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin pc'
-          - elsif params[:controller] == "users"
+          - elsif params[:controller] == "users" || params[:controller] == 'howtouse'
             li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin pc'
-          - elsif params[:controller] == "expenses"
+          - if current_user && current_group
             li.nav-item= link_to groups_url, class: 'nav-link'do
               = "グループ一覧 "
               i.fas.fa-sign-out-alt
