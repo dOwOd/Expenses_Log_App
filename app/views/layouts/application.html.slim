@@ -17,31 +17,36 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-eval': false
   body
     .app-title.navbar.navbar-dark.bg-dark.navbar-expand-md
-      .navbar-brand=link_to 'ExpensesLogApp', root_path, class: 'text-light'
+      - if params[:controller] != "invitations"
+        .navbar-brand=link_to 'ExpensesLogApp', root_path, class: 'text-light'
+      - else
+        .navbar-brand ExpensesLogApp
       ul.navbar-nav.mr-auto
-        li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin mobile'
-        - if current_user == nil || params[:controller] == "sessions"
-          li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin mobile'
-        - if current_user == nil || params[:controller] == "users"
-          li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin mobile'
+        - if params[:controller] != "invitations"
+          li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin mobile'
+          - if current_user == nil || params[:controller] == "sessions"
+            li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin mobile'
+          - if current_user == nil || params[:controller] == "users"
+            li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin mobile'
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替" data-target="#navbarNav" data-toggle="collapse" type="button" 
         span.navbar-toggler-icon
       #navbarNav.collapse.navbar-collapse
         ul.navbar-nav.text-right.ml-auto
-          li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin pc'
-          - if current_user == nil || params[:controller] == "sessions"
-            li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin pc'
-          - if current_user == nil || params[:controller] == "users"
-            li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin pc'
-          - if current_user && current_group
-            li.nav-item= link_to groups_url, class: 'nav-link'do
-              = "グループ一覧 "
-              i.fas.fa-sign-out-alt
-          - if current_user
-            li.nav-item= link_to logout_path, class: 'nav-link', "data-toggle": "modal", "data-target": "#logout-modal" do
-              = "ログアウト "
-              i.fas.fa-sign-out-alt
-            = render partial: '/layouts/logout'
+          - if params[:controller] != "invitations"
+            li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin pc'
+            - if current_user == nil || params[:controller] == "sessions"
+              li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin pc'
+            - if current_user == nil || params[:controller] == "users"
+              li.nav-item= link_to 'ログイン',login_path, class: 'nav-link login_singin pc'
+            - if current_user && current_group
+              li.nav-item= link_to groups_url, class: 'nav-link'do
+                = "グループ一覧 "
+                i.fas.fa-sign-out-alt
+            - if current_user
+              li.nav-item= link_to logout_path, class: 'nav-link', "data-toggle": "modal", "data-target": "#logout-modal" do
+                = "ログアウト "
+                i.fas.fa-sign-out-alt
+              = render partial: '/layouts/logout'
     .container.col-xs-12.col-sm-10.mt-3
       = yield
       - if flash.notice.present?
