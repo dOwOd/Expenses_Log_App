@@ -18,9 +18,9 @@ html
   body
     .app-title.navbar.navbar-dark.bg-dark.navbar-expand-md
       - if params[:controller] != "invitations"
-        .navbar-brand=link_to 'ExpensesLogApp', root_path, class: 'text-light'
+        .navbar-brand=link_to 'Moneylit', root_path, class: 'text-light'
       - else
-        .navbar-brand ExpensesLogApp
+        .navbar-brand Moneylit
       ul.navbar-nav.mr-auto
         - if params[:controller] != "invitations"
           li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin mobile'
