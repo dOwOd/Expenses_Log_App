@@ -1,2 +1,20 @@
-.col-md-12.col-xl-8
-  h1 機能
+= stylesheet_link_tag 'howtouse', media: 'all', 'data-turbolinks-track': 'reload'
+.col-md-12.col-xl-10.mx-auto
+  h1.my-3 機能
+  .main
+    .description1
+      h2.mt-4.description1-1 Moneylitは発生した経費を記録し、<br>
+      h2.mt-2.description1-2 ひと月単位で一覧表示することが出来ます。
+      .d-block.mx-auto= image_tag '/images/main.gif', alt: '', id: 'main_gif'
+      / リロードの度にGifアニメーションを再生させる処理
+      javascript:
+        $(document).ready( function(){
+          var timestamp = new Date().getTime();
+          $('#main_gif').attr('src', '/images/main.gif' + '?' + timestamp);
+        });
+    h2.mt-4 経費には支払日や詳しい説明を登録できます。
+    = image_tag  'new_expense.png'
+    h2.mt-4 ひと月の
+    = image_tag 'setting_percentage.png'
+    h2.mt-4 aaaaaaa
+    = image_tag 'member_list.png'
