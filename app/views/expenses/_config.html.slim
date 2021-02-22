@@ -1,0 +1,15 @@
+.modal.fade#config-modal
+  .modal-dialog
+    .modal-content
+      .modal-header.d-block
+        button type="button" class="close" aria-label="Close" data-dismiss="modal"
+          span aria-hidden="true"
+            | &times;
+        h5.modal-title.text-center 設定項目
+      .modal-body
+        table.table.table-hover
+          tbody
+            = form_with model: @group, local: true do |f|
+              tr.group-delete.mx-auto
+                td.text-left= "グループの削除"
+                td= button_to '削除する', group_path(current_group.friendly_url), data: { confirm: "グループ「#{@group.name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right', rel: "noopener noreferrer"
