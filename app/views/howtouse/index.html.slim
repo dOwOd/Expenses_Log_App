@@ -5,15 +5,22 @@
     .description1
       h2.mt-4.description1-1 Moneylitは発生した経費を記録し、<br>
       h2.mt-2.description1-2 ひと月単位で一覧表示することが出来ます。
-      .d-block.mx-auto= image_tag '/images/main.gif', alt: '', id: 'main_gif'
+      .d-block.mx-auto= image_tag '/images/main.gif', id: 'main_gif'
       / リロードの度にGifアニメーションを再生させる処理
       javascript:
         $(document).ready( function(){
           var timestamp = new Date().getTime();
           $('#main_gif').attr('src', '/images/main.gif' + '?' + timestamp);
         });
-    h2.mt-4 経費には支払日や詳しい説明を登録できます。
-    = image_tag  'new_expense.png'
+    .description2
+      h2.mt-4.description2-1 経費には支払日や詳しい説明を登録できます。
+      .d-block.mx-auto= image_tag '/images/add_expense.gif', id: 'add_expense_gif'
+      / リロードの度にGifアニメーションを再生させる処理
+      javascript:
+        $(document).ready( function(){
+        var timestamp = new Date().getTime();
+          $('#add_expense_gif').attr('src', '/images/add_expense.gif' + '?' + timestamp);
+        });
     h2.mt-4 ひと月の
     = image_tag 'setting_percentage.png'
     h2.mt-4 aaaaaaa
