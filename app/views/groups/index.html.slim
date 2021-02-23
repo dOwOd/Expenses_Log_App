@@ -1,11 +1,5 @@
 .container.col-xs-12.col-md-10.col-xl-8.mt-5
   #group-index.h1 グループ一覧
-  #add_group_btn
-    .w-100.row.justify-content-end
-      = link_to new_group_path, class: 'btn btn-secondary', "data-toggle": "modal", "data-target": "#new-group-modal", rel: "noopener noreferrer" do
-          i.fas.fa-plus.fa-2x
-      = render partial: 'new'
-
   .mt-3#card-container
     - if @groups.count > 0
       - @groups.each do |group|
@@ -14,3 +8,7 @@
           .text-right.my-2.mr-2= "メンバー数 #{@members.where(group_id: group.id).count}人"
     - else
       h2.mt-5#index-group-text= "グループがまだ登録されていません。"
+  .w-100.row.justify-content-sta
+    = link_to new_group_path, class: 'btn btn-secondary', "data-toggle": "modal", "data-target": "#new-group-modal", rel: "noopener noreferrer" do
+        i.fas.fa-plus.fa-2x
+    = render partial: 'new'
