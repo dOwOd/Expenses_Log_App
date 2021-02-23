@@ -1,0 +1,92 @@
+// Place all the styles related to the howtouse controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.col-md-12.col-xl-8.mx-auto,
+    h1 {
+        text-align: left;
+    }
+
+img {
+    width: 100%;
+}
+
+.description1-1, 
+.description1-2, 
+.description2-1,
+.description3-1,
+.description4-1,
+.description4-2,
+.description5-1{
+    opacity: 0;
+    animation-name: fadein-bottom;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.description1-2 {
+    border-bottom: 2px solid;
+    text-align: right;
+}
+.description4-2 {
+    border-bottom: 2px solid;
+}
+
+.description2-1,
+.description3-1,
+.description5-1 {
+    display: inline-block;
+    border-bottom: 2px solid;
+}
+
+@keyframes fadein-bottom {
+    0% {
+       opacity: 0;
+       transform: translateY(20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+ }
+
+// PCサイズ用
+@media (min-width: 769px) {
+    .description1-2, 
+    .description2-1, 
+    .description3-1,
+    .description4-1, 
+    .description4-2,
+    .description5-1 {
+        padding-bottom: 3px;
+    }
+
+    .description4-1,
+    .description4-2 {
+        float: left;
+        border-bottom: 2px solid;
+    }
+}
+
+// モバイルサイズ用
+@media (max-width: 768px) {
+    .description1-1,
+    .description1-2,
+    .description2-1,
+    .description3-1,
+    .description4-1,
+    .description4-2,
+    .description5-1 {
+        font-size: 100%;
+    }
+
+    .description4-1 {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+    .description4-2 {
+        text-align: right;
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+}

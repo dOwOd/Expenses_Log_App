@@ -2,7 +2,7 @@ require 'date'
 
 class ExpensesController < ApplicationController
   include ApplicationHelper
-  skip_before_action :join_required, only: [:index]
+  # skip_before_action :join_required, only: [:index]
   
   def index
     if params[:group_id] != nil
