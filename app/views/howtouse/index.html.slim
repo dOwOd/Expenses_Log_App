@@ -3,7 +3,7 @@
   h1.my-3 機能
   .main
     .description1
-      h2.mt-4.description1-1 Moneylitは発生した経費を記録し、<br>
+      h2.mt-4.description1-1 Moneylitは発生した経費を記録し、
       h2.mt-2.description1-2 ひと月単位で一覧表示することが出来ます。
       .d-block.mx-auto= image_tag '/images/main.gif', id: 'main_gif'
       / リロードの度にGifアニメーションを再生させる処理
@@ -15,13 +15,33 @@
     .description2
       h2.mt-4.description2-1 経費には支払日や詳しい説明を登録できます。
       .d-block.mx-auto= image_tag '/images/add_expense.gif', id: 'add_expense_gif'
-      / リロードの度にGifアニメーションを再生させる処理
       javascript:
         $(document).ready( function(){
         var timestamp = new Date().getTime();
           $('#add_expense_gif').attr('src', '/images/add_expense.gif' + '?' + timestamp);
         });
-    h2.mt-4 ひと月の
-    = image_tag 'setting_percentage.png'
-    h2.mt-4 aaaaaaa
-    = image_tag 'member_list.png'
+    .description3
+      h2.mt-4.description3-1 メールアドレスでメンバーの招待が可能です。
+      .d-block.mx-auto= image_tag '/images/invitation.gif', id: 'invitation_gif'
+      javascript:
+        $(document).ready( function(){
+        var timestamp = new Date().getTime();
+          $('#invitation_gif').attr('src', '/images/invitation.gif' + '?' + timestamp);
+        });    
+    .description4
+      h2.mt-4.description4-1 メンバー内での負担する割合を
+      h2.mt-xs-2.mt-lg-4.description4-2 カンタンに調整することが出来ます。
+      .d-block.mx-auto= image_tag '/images/change_percetage.gif', id: 'change_percetage_gif'
+      javascript:
+        $(document).ready( function(){
+        var timestamp = new Date().getTime();
+          $('#change_percetage_gif').attr('src', '/images/change_percetage.gif' + '?' + timestamp);
+        });
+    .description5
+      h2.mt-4.description5-1 メンバーの負担金額を一覧で確認することが出来ます。
+      .d-block.mx-auto.mb-4= image_tag '/images/member_list.gif', id: 'member_list_gif'
+      javascript:
+        $(document).ready( function(){
+        var timestamp = new Date().getTime();
+          $('#member_list_gif').attr('src', '/images/member_list.gif' + '?' + timestamp);
+        });

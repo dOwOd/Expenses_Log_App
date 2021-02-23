@@ -10,7 +10,13 @@ img {
     width: 100%;
 }
 
-.description1, .description1-1, .description1-2, .description2-1{
+.description1-1, 
+.description1-2, 
+.description2-1,
+.description3-1,
+.description4-1,
+.description4-2,
+.description5-1{
     opacity: 0;
     animation-name: fadein-bottom;
     animation-duration: 1.5s;
@@ -22,8 +28,14 @@ img {
     border-bottom: 2px solid;
     text-align: right;
 }
+.description4-2 {
+    border-bottom: 2px solid;
+}
 
-.description2-1 {
+.description2-1,
+.description3-1,
+.description5-1 {
+    display: inline-block;
     border-bottom: 2px solid;
 }
 
@@ -40,24 +52,41 @@ img {
 
 // PCサイズ用
 @media (min-width: 769px) {
-    .description1-2 {
+    .description1-2, 
+    .description2-1, 
+    .description3-1,
+    .description4-1, 
+    .description4-2,
+    .description5-1 {
         padding-bottom: 3px;
     }
-    .description2-1 {
-        padding-bottom: 3px;
+
+    .description4-1,
+    .description4-2 {
+        float: left;
+        border-bottom: 2px solid;
     }
 }
 
 // モバイルサイズ用
 @media (max-width: 768px) {
-    .description1-1 {
+    .description1-1,
+    .description1-2,
+    .description2-1,
+    .description3-1,
+    .description4-1,
+    .description4-2,
+    .description5-1 {
         font-size: 100%;
     }
-    
-    .description1-2 {
-        font-size: 100%;
+
+    .description4-1 {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
     }
-    .description2-1 {
-        font-size: 100%;
+    .description4-2 {
+        text-align: right;
+        padding-top: 0px;
+        margin-top: 0px;
     }
 }
