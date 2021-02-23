@@ -5,13 +5,15 @@ $(document).on('turbolinks:load', function () {
         if (window.matchMedia('(max-width: 768px)').matches) {
             if (window.scrollY > 30) {
                 $('.button-list').css({
-                    'opacity':'0'
+                    'opacity':'0',
+                    'visibility':'hidden'
                 });
             }
 
             if (window.scrollY < 30) {
                 $('.button-list').css({
-                    'opacity':'1'
+                    'opacity':'1',
+                    'visibility':'visible'
                 });
             }
         }
