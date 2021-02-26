@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     # 重複のないfriendly_urlを生成するまでループ
     loop do
       friendly_url = generate_friendly_url
-      if Expense.friendly.find_by(friendly_url: friendly_url) == nil
+      if User.friendly.find_by(friendly_url: friendly_url) == nil
         break
       end
     end

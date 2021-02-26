@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: ExpensesLogApp_production
-  username: ExpensesLogApp
-  password: <%= ENV['EXPENSESLOGAPP_DATABASE_PASSWORD'] %>
+  database: moneylit_production
+  username: sksn
+  password: <%= ENV['A9zGAtmEYUpMqwk8hvOHI3BPSAPKMf6v'] %>
