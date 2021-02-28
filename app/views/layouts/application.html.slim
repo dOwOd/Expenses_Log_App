@@ -23,7 +23,7 @@ html
         .navbar-brand Moneylit
       ul.navbar-nav.mr-auto
         - if params[:controller] != "invitations"
-          li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin mobile'
+          li.nav-item= link_to '機能', howtouse_index_path, class: 'nav-link login_singin mobile'
           - if current_user == nil || params[:controller] == "sessions"
             li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin mobile'
           - if current_user == nil || params[:controller] == "users"
@@ -33,7 +33,7 @@ html
       #navbarNav.collapse.navbar-collapse
         ul.navbar-nav.text-right.ml-auto
           - if params[:controller] != "invitations"
-            li.nav-item= link_to '使い方', howtouse_index_path, class: 'nav-link login_singin pc'
+            li.nav-item= link_to '機能', howtouse_index_path, class: 'nav-link login_singin pc'
             - if current_user == nil || params[:controller] == "sessions"
               li.nav-item= link_to 'アカウント作成', new_user_path , class: 'nav-link login_singin pc'
             - if current_user == nil || params[:controller] == "users"
