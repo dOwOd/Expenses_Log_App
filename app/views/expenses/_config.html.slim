@@ -12,4 +12,13 @@
             = form_with model: @group, local: true do |f|
               tr.group-delete.mx-auto
                 td.text-left= "グループの削除"
-                td= button_to '削除する', group_path(current_group.friendly_url), data: { confirm: "グループ「#{@group.name}」を削除します。よろしいでしょうか？"},method: :delete, class: 'btn btn-danger float-right', rel: "noopener noreferrer"
+                td= button_to '削除する', group_path(current_group.friendly_url), method: :delete, class: 'btn btn-danger float-right', id: 'group_delete_btn'
+            javascript:
+              $(document).on('click', '#group_delete_btn', function() {
+                console.log('hoge')
+                if(!confirm('グループを削除しますか？')){
+                  return false;
+                  } else {
+                  $(this).parents('form').submit()
+                }
+              })
