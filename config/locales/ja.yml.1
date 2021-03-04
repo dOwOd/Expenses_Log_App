@@ -7,22 +7,6 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
-    models:
-      expense: 経費
-    attributes:
-      expense:
-        id: ID
-        name: 名前
-        expense: 費用
-        paid_at: 支払日
-        description: 詳しい説明
-        created_at: 登録日時
-        updated_at: 更新日時
-      user:
-        screen_name: 名前
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: パスワード(確認)
   date:
     abbr_day_names:
     - 日
