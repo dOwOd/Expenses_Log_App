@@ -9,7 +9,10 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   # validates :email, {presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true}
 
-  # validates :screen_name, presence: true
+  validates :screen_name, presence: true
+  validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
   
   include FriendlyId
   friendly_id :friendly_url

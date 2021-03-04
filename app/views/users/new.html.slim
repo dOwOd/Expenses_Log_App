@@ -1,17 +1,35 @@
+= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload'
 .container.col-xs-11.col-md-6.col-lg-5.col-xl-4.mt-5
   h1 ユーザー登録
 
-  = form_with model: @user, local: true do |f|
+  / local: true を付けることでコントローラからエラー内容を受け取ることができる
+  = form_with model: @user, id: 'sign-in_form', local: true do |f|
     .form-group
       = f.label :screen_name, '名前'
-      = f.text_field :screen_name, class: 'form-control'
+      - if @user.errors.messages[:screen_name].any?
+        = f.text_field :screen_name, class: 'form-control is-invalid'
+        .invalid-feedback= "#{@user.errors.full_messages_for(:screen_name)[0]}"
+      - else 
+        = f.text_field :screen_name, class: 'form-control'
     .form-group
       = f.label :email, 'メールアドレス'
-      = f.text_field :email, class: 'form-control'
+      - if @user.errors.messages[:email].any?
+        = f.text_field :email, class: 'form-control is-invalid'
+        .invalid-feedback= "#{@user.errors.full_messages_for(:email)[0]}"
+      - else
+        = f.text_field :email, class: 'form-control'
     .form-group
       = f.label :password, 'パスワード'
-      = f.password_field :password, class: 'form-control'
+      - if @user.errors.messages[:password].any?
+        = f.password_field :password, class: 'form-control is-invalid'
+        .invalid-feedback= "#{@user.errors.full_messages_for(:password)[0]}"
+      - else
+        = f.password_field :password, class: 'form-control'
     .form-group
       = f.label :password_confirmation, 'パスワード(確認)'
-      = f.password_field :password_confirmation, class: 'form-control'
+      - if @user.errors.messages[:password_confirmation].any?
+        = f.password_field :password_confirmation, class: 'form-control is-invalid'
+        .invalid-feedback= "#{@user.errors.full_messages_for(:password_confirmation)[0]}"
+      - else
+        = f.password_field :password_confirmation, class: 'form-control'
     = f.submit '登録する', class: 'btn btn-primary float-right'
