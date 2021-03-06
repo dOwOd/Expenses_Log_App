@@ -11,8 +11,8 @@ class User < ApplicationRecord
 
   validates :screen_name, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, presence: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, on: :create
+  validates :password_confirmation, presence: true, on: :create
   
   include FriendlyId
   friendly_id :friendly_url
