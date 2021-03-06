@@ -31,7 +31,7 @@ class InvitationsController < ApplicationController
             break
           end
         end
-        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", invited_by: current_group.id, inviter: current_user.id, is_used: false, friendly_url: friendly_url)
+        @invite_user = User.create(screen_name: "名無しの招待者", email: params[:invitee][:email].downcase, password: "foobar", password_confirmation: "foobar", invited_by: current_group.id, inviter: current_user.id, is_used: false, friendly_url: friendly_url)
       end
       
       @invite_user.create_invite_digest
