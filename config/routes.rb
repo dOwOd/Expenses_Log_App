@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'howtouse/index'
+  get '/feature', to: 'howtouse#index', as: :feature
   get '/login', to: 'sessions#new'
+  get '/sign_up', to: 'users#new', as: :sign_up
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
