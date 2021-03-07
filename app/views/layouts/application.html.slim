@@ -15,6 +15,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': false
+    = favicon_link_tag('/images/favicon.png')
   body
     .app-title.navbar.navbar-dark.bg-dark.navbar-expand-md
       - if params[:controller] != "invitations"
