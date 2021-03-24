@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  groups_users_id: 1
-  percentage_of_expenses: 1
-
-two:
-  groups_users_id: 1
-  percentage_of_expenses: 1
