@@ -1,3 +1,4 @@
+[![dOwOd](https://circleci.com/gh/dOwOd/Moneylit.svg?style=svg)](<https://app.circleci.com/pipelines/github/dOwOd/Moneylit>)
 # README
 
 This README would normally document whatever steps are necessary to get the
