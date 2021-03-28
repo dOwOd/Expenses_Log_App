@@ -1,44 +1,36 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/circleci-demo-ruby-rails
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
     docker:
-      - image: circleci/ruby:2.4.1-node
+      # specify the version you desire here
+      - image: circleci/ruby:2.6.0-node-browsers
         environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
-    # `host: localhost` でアクセスできるサービス コンテナ イメージ
-      - image: circleci/postgres:9.6.2-alpine
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle-test_test
+          # ①
+          BUNDLER_VERSION: 2.0.1
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
+
     steps:
       - checkout
-      # バンドル キャッシュを復元します
-      - restore_cache:
-          keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
-            - rails-demo-
-      # 依存関係をバンドル インストールします
+
+      # ②
       - run:
-          name: 依存関係のインストール
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
-      - run: sudo apt install -y postgresql-client || true
-      # バンドル キャッシュを保存します
-      - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - run:
-          name: データベースのセットアップ
+          name: setup bundler
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:structure:load
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo rm /usr/local/bin/bundler
+            sudo gem install bundler
+
+      # •••
+
       - run:
-          name: RSpec の並列実行
-          command: bin/rails test
-      # アーティファクトを保存します
-      - store_test_results:
-          path: /tmp/test-results
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
