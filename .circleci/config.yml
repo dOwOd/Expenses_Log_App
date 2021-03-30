@@ -45,7 +45,7 @@ jobs:
       - run:
           name: データベースの起動を待機
           command: |
-            dockerize -wait tcp://localhost:5432 -timeout 1m
+            dockerize -wait tcp://127.0.0.1:5432 -timeout 2m
       - run:
           name: データベースのセットアップ
           command: bundle exec rake db:migrate --trace
