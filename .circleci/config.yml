@@ -13,7 +13,7 @@ jobs:
       BUNDLE_PATH: vendor/bundle
       POSTGRES_HOST: localhost
       POSTGRES_USER: root
-      POSTGRES_DB: postgres
+      POSTGRES_DB: moneylit_test
       POSTGRES_PASSWORD: ''
       RAILS_ENV: test
     steps:
