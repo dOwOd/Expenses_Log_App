@@ -43,7 +43,7 @@ jobs:
       - run:
           name: 並列にテストを実行
           command: |
-            bundle xeec rspec --format RspecJunitFormatter \
+            bundle exec rspec --format RspecJunitFormatter \
                               --out test_results/rspec.xml \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
       - store_test_results:
