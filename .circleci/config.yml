@@ -1,99 +1,50 @@
 version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
 jobs:
-  build_and_test:
-    parallelism: 2
+  build:
     docker:
-      - image: cimg/ruby:2.7.2-node
-      - image: circleci/postgres:9.6.9-alpine
-    environment:
-      PGHOST: 127.0.0.1
-      PGUSER: root
-      BUNDLE_JOBS: 3
-      BUNDLE_RETRY: 3
-      BUNDLE_PATH: vendor/bundle
-      POSTGRES_HOST: localhost
-      POSTGRES_USER: root
-      POSTGRES_DB: moneylit_test
-      POSTGRES_PASSWORD: ''
-      RAILS_ENV: test
+      - image: circleci/ruby:2.7.2-buster-node-browsers
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: circleci
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+      - image: circleci/postgres:9.6.9
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_DB: blog_rails6_test
+          POSTGRES_HOST_AUTH_METHOD: trust # パスワードなし
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
     steps:
       - checkout
       - restore_cache:
           keys:
-          - rails-bundle-v1-{{ checksum "Gemfile.lock" }}
-          - rails-bundle-v1-
+            - blog-bundle-v1-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
+            - blog-bundle-v1-
       - run:
-          name: pg gemの依存関係のインストール
-          command: sudo apt-get update; sudo apt-get install libpq-dev
-      - run:
-          name: gem依存関係のインストール
-          command: bundle check || bundle install
+          name: Bundler and Yarn
+          command: |
+            gem install bundler -v '2.1.4' -N
+            bundle -v
+            bundle install --jobs=3 --retry=3 --path vendor/bundle
+            yarn install
       - save_cache:
-          key: rails-bundle-v1-{{ checksum "Gemfile.lock" }}
           paths:
-          - vendor/bundle
-      - restore_cache:
-          keys:
-          - rails-yarn-v1-{{ checksum "yarn.lock" }}
-          - rails-yarn-v1-
+            - ./vendor/bundle
+            - ./node_modules
+          key: blog-bundle-v1-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
       - run:
-          name: node_modules依存関係のインストール
-          command: yarn install
-      - save_cache:
-          key: rails-yarn-v1-{{ checksum "yarn.lock" }}
-          paths:
-          - ~/.cache/yarn
-      - run:
-          name: データベースの起動を待機
-          run: cp -v config/database.ci.yml config/database.yml
+          name: DB Initializing
           command: |
             dockerize -wait tcp://localhost:5432 -timeout 1m
+            bundle exec rake db:schema:load
       - run:
-          name: データベースのセットアップ
-          command: bundle exec rake db:migrate --trace
-      - run:
-          name: 並列にテストを実行
+          name: rspec
           command: |
             bundle exec rspec --format RspecJunitFormatter \
                               --out test_results/rspec.xml \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+                              --format documentation
       - store_test_results:
           path: test_results
-      - run:
-          name: カバレッジレポートをアップロードする準備
-          command: |
-            mkdir coverage_results
-            cp coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - vendor/bundle
-            - coverage_results
-  coverage:
-    docker:
-      - image: cimg/ruby:2.6.5-node
-    environment:
-      BUNDLE_PATH: vendor/bundle
-      RAILS_ENV: test
-    steps:
-      - checkout
-      - attach_workspace:
-            at: ~/project
-      - run:
-          name: pg gemの依存関係のインストール
-          command: sudo apt-get update; sudo apt-get install libpq-dev
-      - run: bundle install
-      - run:
-          name: カバレッジレポートをマージ
-          command: |
-            bundle exec rake simplecov:merge_results
-      - store_artifacts:
-          path: coverage
-workflows:
-  version: 2
-  main:
-    jobs:
-    - build_and_test
-    - coverage:
-        requires:
-          - build_and_test
