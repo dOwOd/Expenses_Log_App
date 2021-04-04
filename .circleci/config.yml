@@ -45,6 +45,6 @@ jobs:
           command: |
             bundle exec rspec --format progress \
                               --out test_results/rspec.xml \
-                              $(circleci tests glob "spec/system/expenses_spec.rb" | circleci tests split --split-by=timings)
+                              $(circleci tests glob "project/spec/system/expenses_spec.rb" | circleci tests split --split-by=timings)
       - store_test_results:
           path: test_results
