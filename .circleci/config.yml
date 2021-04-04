@@ -13,8 +13,8 @@ jobs:
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       - image: circleci/postgres:9.6.9
         environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: blog_rails6_test
+          POSTGRES_USER: root
+          POSTGRES_DB: moneylit_test
           POSTGRES_HOST_AUTH_METHOD: trust # パスワードなし
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
     steps:
