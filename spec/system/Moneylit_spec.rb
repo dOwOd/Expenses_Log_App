@@ -21,14 +21,11 @@ describe '経費管理機能', type: :system do
         expect(page).to have_content 'グループ一覧'
       end
 
-      # fadeクラスを削除
-      # page.evaluate_script('$(".fade").removeClass("fade")')
-
-      # it 'グループを作成することが出来る' do
-      #   visit new_group
-      #   fill_in 'グループ名', with: 'テストグループ'
-      #   click_button '保存する'
-      # end
+      it 'グループを作成することが出来る' do
+        visit new_group_path
+        fill_in 'グループ名', with: 'テストグループ'
+        click_button
+      end
 
       # it 'グループを選択することが出来る' do
       #   visit expenses_list_url
