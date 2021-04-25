@@ -5,8 +5,6 @@ describe '経費管理機能', type: :system do
     before do
       # ユーザーAを作成しておく
       user_a = FactoryBot.create(:user, screen_name: 'ユーザーA', email: 'a@example.com', friendly_url: generate_friendly_url)
-      # 作成者がユーザーAである経費を作成しておく
-      FactoryBot.create(:expense, name: '最初の経費', paid_at: Time.now, user_id: user_a.id,friendly_url: generate_friendly_url)
     end
     context 'ユーザーAがログインしている時' do
       before do
@@ -27,10 +25,31 @@ describe '経費管理機能', type: :system do
       end
 
       it 'グループを選択することが出来る' do
-        click_link 'テストグループ'
+        selected_group
         expect(page).to have_content "#{Date.today.strftime("%Y年%m月")}"
       end
 
+      it '経費の作成ができて表示がされる' do
+        selected_group
+        create_expense
+        expect(page).to have_content '最初の経費'
+      end
+      
+    end
+
+    # グループの選択
+    def selected_group
+      click_link 'テストグループ'
+    end
+
+    # 経費の作成
+    def create_expense
+      selected_group
+      find('div.selectDate a.btn.btn-outline-secondary').click
+      fill_in '名前', with: '最初の経費'
+      fill_in '費用', with: '5000'
+      fill_in 'expense[description]', with: 'hoge'
+      click_button '登録する'
     end
   end
 end
