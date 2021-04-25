@@ -15,22 +15,21 @@ describe '経費管理機能', type: :system do
         fill_in 'メールアドレス', with: 'a@example.com'
         fill_in 'パスワード', with: 'password'
         click_button
-      end
 
-      it 'ユーザーAが参加しているグループ一覧が表示される' do
-        expect(page).to have_content 'グループ一覧'
-      end
-
-      it 'グループを作成することが出来る' do
-        visit new_group_path
+        # グループ「テストグループ」を作成する
+        find('.btn.btn-secondary').click
         fill_in 'グループ名', with: 'テストグループ'
-        click_button
+        click_button '保存する'
       end
 
-      # it 'グループを選択することが出来る' do
-      #   visit expenses_list_url
-      #   expect(page).to have_content '1人あたり'
-      # end
+      it '作成した「テストグループ」が表示されている' do
+        expect(page).to have_content 'テストグループ'
+      end
+
+      it 'グループを選択することが出来る' do
+        click_link 'テストグループ'
+        expect(page).to have_content "#{Date.today.strftime("%Y年%m月")}"
+      end
 
     end
   end
