@@ -1,0 +1,52 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.2-buster-node-browsers
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: circleci
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+      - image: circleci/postgres:9.6.9
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: ExpensesLogApp_test
+          POSTGRES_HOST_AUTH_METHOD: trust # パスワードなし
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - blog-bundle-v1-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
+            - blog-bundle-v1-
+      - run:
+          name: Bundler and Yarn
+          command: |
+            gem install bundler -v '2.1.4' -N
+            bundle -v
+            bundle install --jobs=3 --retry=3 --path vendor/bundle
+            yarn install
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+            - ./node_modules
+          key: blog-bundle-v1-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: DB Initializing
+          command: |
+            dockerize -wait tcp://localhost:5432 -timeout 1m
+            bundle exec rake db:schema:load
+      - run:
+          name: 並列にテストを実行
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results

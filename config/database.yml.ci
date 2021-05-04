@@ -1,0 +1,9 @@
+test: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: <%= ENV.fetch("root") %>
+  password: <%= ENV.fetch("hoge") %>
+  host: <%= ENV.fetch("127.0.0.1") %>
+  port: <%= ENV.fetch("5432") %>
+  database: moneylit_test
