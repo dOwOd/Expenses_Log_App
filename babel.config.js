@@ -22,8 +22,16 @@ module.exports = function(api) {
         {
           targets: {
             node: 'current'
-          }
+          },
+          useBuiltIns: "usage",
+          corejs: 3,
         }
+      ],
+      [
+        "@babel/preset-react",
+        {
+          runtime: "automatic",
+        },
       ],
       (isProductionEnv || isDevelopmentEnv) && [
         '@babel/preset-env',
